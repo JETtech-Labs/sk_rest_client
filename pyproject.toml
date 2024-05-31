@@ -10,7 +10,7 @@ readme = "README.md"
 license = {file = "LICENSE.md"}
 requires-python = ">=3.8"
 authors = [
-    { name = "Jason Thomas", email = "jethomas@jettechlabs.com" },
+    { name = "Jason Thomas", email = "info@jettechlabs.com" },
 ]
 classifiers = [
     "Environment :: Web Environment",
@@ -26,6 +26,7 @@ classifiers = [
 dependencies = [
     "requests",
     "cryptography",
+    "sk_schemas"
 ]
 
 
