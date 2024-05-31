@@ -6,7 +6,8 @@ The SK-VPN is based on the Patent Pending SecureKey Cryptographic Library,
 details of which can be found at https://www.jettechlabs.com. 
 The SK-VPN has been developed through joint ventures with the US Government and JET Technology Labs Inc.
 
-The python client library and API Schema can be found at https://github.com/JETtech-Labs/sk-rest-client.
+The python client SDK and API Schema can be found on `Github <https://github.com/JETtech-Labs/sk_rest_client>`_ and PyPI. 
+The python module can be install using pip.
 
 SK-VPN is available through the Azure Third Party Marketplace.
 Get started using the SK-VPN with :ref:`installation` .

@@ -47,15 +47,17 @@ The CLI supports documentation via the ``?`` command.
 
 .. _python_client:
 
-Python Client
--------------
+Python Client (SDK)
+-------------------
 The Python client modules are a reference implementation used to manage the SK-VPN using the 
 REST API and the SSH command line. 
 
-The Client libraries are available in github.com/JETtech-Labs. 
+The client libraries are available from `Github <https://github.com/JETtech-Labs/sk_rest_client>`_ and `PyPI <https://pypi.org>`_.
+
+
 
 Extensions of the client modules will be available in the future to allow management of 
-multiple SK-VPNs that comprise a large enterprise network.
+a large network of SK-VPNs and will include a Web UI interface.
 
 
 
