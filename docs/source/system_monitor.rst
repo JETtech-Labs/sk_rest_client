@@ -12,6 +12,16 @@ Syslog is used for system event logging see :ref:`syslog_configuration`.
 
 .. _system_enpoints:
 
+    
+Web UI System Monitoring 
+------------------------
+
+The Web UI System Admin Page is used to monitor overall system health and status:
+
+.. image:: images/UI/System_Admin_Status.png
+    :align: center
+    :scale: 25%
+
 System Monitoring API 
 ---------------------
 
@@ -43,7 +53,15 @@ System endpoints for DNS: see :ref:`dns_config`
 System Logs 
 -----------
 
-System Logs are managed using the REST API:
+
+The Web UI can be used to retrieve System Log Files from System -> System Logs:
+
+.. image:: images/UI/System_Admin_Logs.png
+    :align: center
+    :scale: 25%
+
+
+System Logs can be retrieved using the REST API:
 
 * Get the system logs: GET ``/sys/logs/[log_name]``
 
@@ -58,7 +76,14 @@ System Logs are managed using the REST API:
 
 System Statistics 
 -----------------
-System Statistics are available to retrieve informaton about the system and current 
+System Statistics are available to retrieve informaton about the system hardware and software.
+
+
+The Web UI can be used to retrieve System Statistics from the Statistics page:
+
+.. image:: images/UI/Stats_HW.png
+    :align: center
+    :scale: 40%
 
 System Statistics can be viewed using the REST API:
 

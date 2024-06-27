@@ -452,6 +452,8 @@ class CertUtils:
 
         assert os.path.isfile(key_file), "Failed making Keyfile"
         assert os.path.isfile(cert_file), "Failed making CA Cert "
+        print(f"Created test CA Cert: {cert_file} and Key: {key_file}")
+
         return cert_file, key_file
 
     @staticmethod
@@ -463,6 +465,7 @@ class CertUtils:
         )
         assert os.path.isfile(user_cert_file), "Failed making User Cert File"
         assert os.path.isfile(user_key_file), "Failed making User Key File "
+        print(f"Created test User Cert: {user_cert_file} and Key: {user_key_file}")
 
         return user_cert_file, user_key_file
 

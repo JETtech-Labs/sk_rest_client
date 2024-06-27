@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import json
+import time
 from http import HTTPStatus
 from typing import List
 
@@ -75,7 +76,10 @@ class ClientIpsecMgr:
             return ret_list
 
     def add_connection(
-        self, conn_model: ConnCreateModel, activate=True
+        self,
+        conn_model: ConnCreateModel,
+        activate=True,
+        wait_activate_time: float | None = None,
     ) -> tuple[bool, Response]:
         # first upload the connection so its saved
         response = self.http_client.http_post(
@@ -86,6 +90,8 @@ class ClientIpsecMgr:
         if ret and response.status_code == HTTPStatus.ACCEPTED and activate:
             print(f"Activating {conn_model.name}")
             ret, response = self.load_connection(conn_model.name)
+            if wait_activate_time:
+                time.sleep(wait_activate_time)
         return ret, response
 
     def initiate_child_sa(self, child_name: str) -> bool:

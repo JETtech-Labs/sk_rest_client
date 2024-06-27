@@ -121,6 +121,19 @@ class ClientIntfMgr:
 
         return resp, None
 
+    def get_ip_routes_saved(
+        self,
+    ) -> tuple[Response, list[RouteModel] | None]:
+        resp = self.http_client.http_get(API_INTERFACES_V1 + "/ip/routes-saved")
+        ret_list = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for resp_json in resp.json():
+                ret_list.append(RouteModel(**resp_json))
+
+            return resp, ret_list
+
+        return resp, None
+
     def add_ip_route(
         self, ip_subnet: str, interface_name: str | None, gateway_ip: str | None
     ) -> Response:

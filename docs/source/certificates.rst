@@ -7,9 +7,9 @@ Certificate Support
 -------------------
 The SK-VPN supports Certificate Based Authentication.
 
-The SK-VPN enforces algorithm compliance for internally generated and user uploaded Certificates. 
+The SK-VPN enforces algorithm compliance for internally generated and user uploaded IPsec Certificates. 
 
-Certificates must meet the following standards:
+IPsec Certificates must meet the following standards:
 
 * CNSA v1.0 Algorithms: `CNSA v1.0 <https://media.defense.gov/2021/Sep/27/2002862527/-1/-1/0/CNSS%20WORKSHEET.PDF>`_ 
 * RSA (3072-bit+) 
@@ -17,20 +17,72 @@ Certificates must meet the following standards:
 * Hashes (SHA-384+)
 
 
+.. _cert_import:
+
+Certificate Import
+------------------
+
+The SK-VPN allows admins to import Certificates which can be used for 
+authentication. The SK-VPN supports PEM formatted X509 Certificates.
+
+
+--------------------------
+Import using Web Interface
+--------------------------
+Import CAs and User Certificates using the Certificates -> Add Certificate:
+
+.. image:: images/UI/Certificate_Import.png
+    :align: center
+
+|
+
+---------------------
+Import using REST API
+---------------------
+The REST API can be used to import Certificates:
+
+* POST `/certs/users`
+* POST `/certs/tls/client-cert`
+* POST `/certs/syslog/ca`
+
+
 .. _cert_csr:
 
 Certificate Signing Request (CSR)
 ---------------------------------
 
-The SK-VPN supports generating Certificate Signing Requests (CSR) in order to generate 
-private keys locally to the SK-VPN and generate a Certificate using a Certificate Authority (CA).
+The SK-VPN supports Certificate Signing Requests (CSR) which can be used to generate 
+private keys local to the SK-VPN and export a CSR. The CSR can then be signed by a Certificate Authority (CA)
+to generate a signed Certificate. This signed Certificate can be uploaded to the SK-VPN and used 
+to authenticate the SK-VPN.
 
-This process is used in mutliple scenarios including generating a Syslog client certificate
-for Syslog authentication, and generating a HTTPS certificate for HTTPS authentication. 
-The purpose of the CSR is to allow the user to sign the CSR which
-can be used by Browsers, and other client software to authenticate the SK-VPN.
+This process is used in mutliple scenarios including generating IPsec identity certificates,
+Syslog client certificates, and HTTPS certificates for Web authentication. 
 
 
+-----------------------
+CSR using Web Interface
+-----------------------
+The SK-VPN Web Interface Certificates -> Signing Request can be used to create CSRs and upload signed certificates:
+
+.. image:: images/UI/Certificates_Signing_Request.png
+    :align: center
+
+|
+
+The CSR PEM formatted data is displayed in the Signing Request Table and can be dowloaded then signed by a Certificate Authority.
+To Upload the signed certificate to the SK-VPN, find the CSR in the Signing Request Table and 
+click on the Actions Menu -> Upload Signed Certificate.
+Select the signed certificate file and select the `usage` field for how this certificate will be used.
+
+.. image:: images/UI/Certificates_Signing_Request_Upload.png
+    :align: center
+
+|
+
+------------------
+CSR using REST API
+------------------
 In order to generate a CSR, use the REST API:
 
 * (*Pre*) Generate a Certificate Authority (CA) Root Certificate and Private Key pair which will be used to sign the Certificate
@@ -51,6 +103,26 @@ Certificate Information enpoints give a summary of the certificate and contains 
 which is used in other Certificate Operations.
 Certificate Details endpoints give the full description of the certificate and contains all fields in the certificate.
 
+-------------------------------------
+Web Interface Certificate Information
+-------------------------------------
+The SK-VPN Web Interface can be used to view details of and manage certificates on the Certificates Page:
+
+.. image:: images/UI/Certificates.png
+    :align: center
+
+|
+
+To view the details of a certificate, click on the Actions Menu -> View Details which opens a slideout containing the full details of the certificate.
+
+.. image:: images/UI/Certificate_Details.png
+    :align: center
+
+|
+
+--------------------------------
+REST API Certificate Information
+--------------------------------
 The REST API can be used to get the summary information of certificates:
 
 * GET `/cert/certs`

@@ -15,6 +15,7 @@ from sk_schemas.certs import (
     CertUsageEnum,
     CsrResponseModel,
     CsrSignedRequestModel,
+    CsrUuidModel,
     KeyInfoModel,
     KeyLoadedInfoModel,
 )
@@ -150,6 +151,26 @@ class ClientCertMgr:
         else:
             return response, None
 
+    def get_cert_details_by_id(
+        self, cert_id: str
+    ) -> tuple[Response, CertDetailModel | None]:
+        response = self.http_client.http_get(API_CERTS_V1 + "/details/id/" + cert_id)
+        if response and response.status_code == HTTPStatus.OK:
+            return response, CertDetailModel(**response.json())
+        else:
+            return response, None
+
+    def get_cert_details_by_fingerprint(
+        self, fingerprint: str
+    ) -> tuple[Response, CertDetailModel | None]:
+        response = self.http_client.http_get(
+            API_CERTS_V1 + "/details/fingerprint/" + fingerprint
+        )
+        if response and response.status_code == HTTPStatus.OK:
+            return response, CertDetailModel(**response.json())
+        else:
+            return response, None
+
     def get_https_cert_details(self) -> tuple[Response, CertDetailModel | None]:
         response = self.http_client.http_get(API_CERTS_V1 + "/tls/server-cert")
         if response and response.status_code == HTTPStatus.OK:
@@ -157,9 +178,20 @@ class ClientCertMgr:
         else:
             return response, None
 
+    def get_https_cert_info(self) -> tuple[Response, CertInfoModel | None]:
+        response = self.http_client.http_get(API_CERTS_V1 + "/tls/server-cert/info")
+        if response and response.status_code == HTTPStatus.OK:
+            if response.json() is None:
+                return response, None
+            return response, CertInfoModel(**response.json())
+        else:
+            return response, None
+
     def get_syslog_ca_cert_details(self) -> tuple[Response, CertDetailModel | None]:
         response = self.http_client.http_get(API_CERTS_V1 + "/syslog/ca")
         if response and response.status_code == HTTPStatus.OK:
+            if response.json() is None:
+                return response, None
             return response, CertDetailModel(**response.json())
         else:
             return response, None
@@ -167,6 +199,8 @@ class ClientCertMgr:
     def get_syslog_client_cert_details(self) -> tuple[Response, CertDetailModel | None]:
         response = self.http_client.http_get(API_CERTS_V1 + "/syslog/client-cert")
         if response and response.status_code == HTTPStatus.OK:
+            if response.json() is None:
+                return response, None
             return response, CertDetailModel(**response.json())
         else:
             return response, None
@@ -199,6 +233,20 @@ class ClientCertMgr:
         else:
             return resp, None
 
+    def get_open_csrs(
+        self,
+    ) -> tuple[Response, list[CsrResponseModel] | None]:
+
+        resp = self.http_client.http_get(API_CERTS_V1 + "/signing_requests")
+        ret = []
+
+        if resp and resp.status_code == HTTPStatus.OK:
+            for csr in resp.json():
+                ret.append(CsrResponseModel(**csr))
+            return resp, ret
+        else:
+            return resp, None
+
     def gen_new_csr(
         self, csr: CertSigningRequestModel
     ) -> tuple[Response, CsrResponseModel | None]:
@@ -211,6 +259,15 @@ class ClientCertMgr:
             return resp, CsrResponseModel(**resp_data)
         else:
             return resp, None
+
+    def delete_open_csr(self, csr_id: CsrUuidModel) -> Response:
+
+        data = json.loads(csr_id.model_dump_json())
+        resp = self.http_client.http_delete(
+            API_CERTS_V1 + "/signing_request", json=data
+        )
+
+        return resp
 
     def upload_signed_csr_file(
         self,

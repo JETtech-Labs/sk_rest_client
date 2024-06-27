@@ -20,6 +20,10 @@ The SK-VPN requires an initial user to be setup before any other functionality c
 The initial user must be an administrator and should be set following the instructions below. 
 The REST API and CLI both support creation of the initial user.
 
+From the Web UI:
+
+On initial login the Web interface will prompt for creation of an initial user.
+
 
 From the REST API:
 
@@ -34,6 +38,28 @@ From the CLI:
 * Login with the username and password.
 
 
+User Management
+---------------
+
+The Web UI allows administrators to manage users and user account settings.
+
+Access User Management from the System -> Users page:
+
+.. image:: images/UI/System_Admin_Users.png
+    :align: center
+    :scale: 50%
+
+|
+
+User Settings including Profile, Password Changes, and OTP settings are available in the User Settings page:
+
+.. image:: images/UI/User_Settings_Profile.png
+    :align: center
+    :scale: 50%
+
+|
+
+------------
 Adding Users
 ------------
 
@@ -49,7 +75,7 @@ From the CLI:
 * Use the ``add_user`` command to create an new user.
 * Provide the username and password and the desired role.
 
-
+--------------------
 Change User Password
 --------------------
 
@@ -65,6 +91,7 @@ From the CLI:
 * Use the ``change_password`` command to change the password for the current user.
 * Provide the current username and password and the new password.
 
+--------------
 Removing Users
 --------------
 
@@ -79,12 +106,21 @@ From the CLI:
 * Use the ``add_user`` command to create an new user.
 * Provide the username and password and the desired role.
 
+----------------------------------
 Enable Multi-Factor Authentication
 ----------------------------------
 
 SK-VPN supports Multi-Factor Authentication (MFA) for users via Timebased One-Time Password (TOTP).
 The REST API and CLI can generate QRCodes which can be imported into Duo Security, Google Authenticator and other
 MFA applications. Once enabled, users will be required to provide an OTP on login.
+
+Web UI OTP settings are available in the User Settings -> OTP page:
+
+.. image:: images/UI/User_Settings_OTP.png
+    :align: center
+    :scale: 50%
+
+|
 
 From the REST API:
 
@@ -106,11 +142,17 @@ From the CLI:
 .. image:: images/sk_vpn_cli_otp_qrcode.png
     :align: center
 
+|
+
 .. _ssh_user_mgmt:
 
 SSH User Management
 -------------------
 SSH users can be added allowing for SSH access to the SK-VPN. 
+
+From the Web UI:
+
+System -> SSH Users allows administrators to manage SSH users.
 
 From the REST API:
 

@@ -140,8 +140,10 @@ Create the SK-VPN Virtual Machine:
 .. code-block:: bash
 
     # update below with the latest SK-VPN version
-    SK_URN="JET-TECH:sk-vpn:sk-vpn-v1-0-1"
-    ADMIN_USER="secure_key_admin"
+    # view all available SK-VPN versions: 
+    # az vm image list --publisher jet-tech-labs --all    
+    SK_URN="jet-tech-labs:sk-vpn:plan1:1.0.1717174796"
+    ADMIN_USER="sk_admin"
 
     # Disk Size must be >= 2 GB 
     DISK_SIZE="4"
@@ -152,6 +154,7 @@ Create the SK-VPN Virtual Machine:
     # create the SK-VPN VM
     az vm create \
         --resource-group ${RESOURCE_GROUP} \
+        --security-type Standard \
         --image ${SK_URN} \
         --name SK-VPN-GW \
         --os-disk-size-gb ${DISK_SIZE} \
@@ -172,6 +175,8 @@ Create the SK-VPN Virtual Machine:
     
     The WAN Network Private IP address should be of the form: 10.X.0.X 
     The LAN Network Private IP address should be of the form: 10.X.1.X
+
+    see :ref:`interface_role_assignment`
 
 
 

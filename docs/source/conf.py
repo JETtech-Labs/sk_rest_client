@@ -7,7 +7,7 @@ copyright = "2023, JET Technology Labs Inc"
 author = "JET Technology Labs"
 
 release = "0.1"
-version = "1.0.1"
+version = "1.1.1"
 
 # -- General configuration
 

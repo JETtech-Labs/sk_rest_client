@@ -5,7 +5,13 @@ from typing import List
 
 from requests import Response
 
-from sk_schemas.stats import API_STATS_V1, FileDataModel, StatsStringModel
+from sk_schemas.stats import (
+    API_STATS_V1,
+    API_STATS_V2,
+    DpStats,
+    FileDataModel,
+    StatsStringModel,
+)
 
 from .client_base import HttpClient
 
@@ -47,6 +53,18 @@ class ClientStatsMgr:
         if resp and resp.status_code == HTTPStatus.OK:
             stats_json = resp.json()
             return resp, StatsStringModel(**stats_json)
+
+        return resp, None
+
+    def get_error_stats_v2(
+        self,
+    ) -> tuple[Response, DpStats | None]:
+
+        resp = self.http_client.http_get(API_STATS_V2 + "/errors")
+
+        if resp and resp.status_code == HTTPStatus.OK:
+            stats_json = resp.json()
+            return resp, DpStats(**stats_json)
 
         return resp, None
 

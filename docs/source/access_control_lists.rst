@@ -1,5 +1,6 @@
 .. _acl_setup:
 
+
 ACL Setup
 =========
 
@@ -25,9 +26,28 @@ ACL Rules are applied to a specific interface role. LAN or WAN are the currently
 Setup ACL Rules
 ---------------
 
-The SK-VPN allows ACL rules to be defined and uploaded to the SK-VPN using the REST API:
+The SK-VPN allows ACL rules to be created and managed using the Web UI and REST API.
 
-There are two ways to modify ACLs:
+The Web UI Access Control Page is used to configure ACL rules:
+
+.. image:: images/UI/ACL_Rule_list.png
+    :align: center
+    :scale: 25%
+    
+|
+
+Adding a new rule is done by selecting the "Add Rule" button on the top of the Web UI:
+
+.. image:: images/UI/ACL_Rule_Create.png
+    :align: center
+    :scale: 25%
+
+|
+
+-------
+ACL API
+-------
+The REST API provides two methods to configure ACL rules:
 The recommended way is to replace the entire set of rules using the "PUT" method.
 
 * Set the current IP ACL Rules: PUT ``/acl/rules/ip``
@@ -59,7 +79,17 @@ The SK-VPN allows ACL rules to be viewed using the REST API:
 View ACL Stats
 --------------
 
-ACL rule violations (deny drops) are reported in the ``/stats/errors`` statistics see :ref:`statistics`
+The Web UI Access Control -> Stats page is used to view ACL statistics.
+Additional ACL drop/deny coutners are available in Statistics -> Errors.
+
+.. image:: images/UI/ACL_stats.png
+    :align: center
+    :scale: 25%
+
+.
+
+.. note::
+    The REST API provides statistics on ACL rule violations (deny drops) are reported in the ``/stats/errors`` statistics see :ref:`statistics`
 
 
 .. _example_acl_rules:

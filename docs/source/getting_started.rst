@@ -5,6 +5,23 @@ Getting Started
 
 .. _api_docs:
 
+Web Interface
+-------------
+The SK-VPN Web Interface can be used to manage the SK-VPN system using a web browser. 
+
+Use a browser to access the SK-VPN Web Interface:
+
+.. code-block:: console
+
+    firefox https://<management_ip_address>/
+
+The SK-VPN Web Interface allows management and monitoring of the SK-VPN:
+
+.. image:: images/UI/Dashboard_1.png
+    :align: center
+
+|
+
 HTTPS REST API
 --------------
 The REST API is used to manage the SK-VPN system over HTTPS. 
@@ -26,6 +43,7 @@ The SK-VPN REST API Schema Documentation is OpenAPI 3.0 compatible and looks lik
 .. image:: images/rest_api_docs.png
     :align: center
 
+|
 
 
 .. _cli_docs:
@@ -57,7 +75,7 @@ The client libraries are available from `Github <https://github.com/JETtech-Labs
 
 
 Extensions of the client modules will be available in the future to allow management of 
-a large network of SK-VPNs and will include a Web UI interface.
+a large network of SK-VPNs.
 
 
 

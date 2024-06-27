@@ -69,10 +69,24 @@ In order to use a custom signed HTTPS certificate, use the REST API:
 Syslog Configuration
 --------------------
 The SK-VPN uses industry standard Syslog formats for system event logging. 
-A remote Syslog Server can be used to receive these events, or they can 
-be retrieved via the REST API `sys/logs/*`` endpoints.
+A remote Syslog Server can be used to receive these events. 
+
+Alternatively the System logs may be retrieved using the Web UI System -> System Logs
+and using the REST API `sys/logs/*`` endpoints.
+
 The Syslog server may be on a LAN or WAN network and must accessible to the SK-VPN over the Management Interface.
 
+------------------------
+Web UI Syslog Management
+------------------------
+
+The Web UI can be used to manage Syslog settings.
+
+.. image:: images/UI/System_Admin_Syslog.png
+    :align: center
+    :scale: 40%
+
+|
 
 Remote Syslog setup is achieved via the REST API with a POST to ``sys/syslog/settings``.
 
@@ -103,6 +117,7 @@ In order to generate a Syslog client certificate, use the REST API:
 * Verify the Certificate detials using the GET ``/cert/syslog/client-cert``, ``/cert/syslog/ca-cert`` and ``/cert/syslog/ca``
 * Enable syslog authentication: POST ``sys/syslog/settings`` with the `enable_authentication` field set to True
 
+
 .. _dns_config:
 
 DNS Configuration
@@ -119,7 +134,15 @@ The default DNS servers are Cloudflare and Google:
 * 8.8.8.8
 * 8.8.4.4
 
-Use the REST API to configure DNS:
+The Web UI can be used to manage DNS settings.
+
+.. image:: images/UI/System_Admin_DNS.png
+    :align: center
+    :scale: 40%
+
+|
+
+The REST API can be used to configure DNS:
 
 * Upload DNS Settings POST ``/sys/dns/settings`` endpoint
 

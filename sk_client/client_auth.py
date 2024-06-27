@@ -80,6 +80,9 @@ class ClientAuthMgr:
     def user_otp_generate_qrcode(self) -> Response:
         return self.http_client.http_post(API_AUTH_V1 + "/otp/generate-qrcode")
 
+    def user_otp_generate_qrcode_b64(self) -> Response:
+        return self.http_client.http_post(API_AUTH_V1 + "/otp/generate-qrcode-b64")
+
     def user_otp_generate_uri(self) -> tuple[Response, OtpUriModel | None]:
         resp = self.http_client.http_post(API_AUTH_V1 + "/otp/generate-uri")
         if resp and resp.status_code == HTTPStatus.OK:

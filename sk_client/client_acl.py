@@ -8,8 +8,16 @@ from typing import List
 
 from requests import Response
 
-from sk_schemas.acl import API_ACL_V1, AclAction, IpAclRule, IpProtocol, MacIpAclRule
+from sk_schemas.acl import (
+    API_ACL_V1,
+    AclAction,
+    AclStats,
+    IpAclRule,
+    IpProtocol,
+    MacIpAclRule,
+)
 from sk_schemas.intf import IfaceRoleTypes
+from sk_schemas.stats import DpStats
 
 from .client_base import HttpClient
 
@@ -48,6 +56,28 @@ class ClientAclMgr:
 
         resp = self.http_client.http_put(API_ACL_V1 + "/rules/ip", json=data)
         return resp
+
+    def get_acl_rule_stats(
+        self,
+    ) -> tuple[Response, list[AclStats]]:
+        resp = self.http_client.http_get(API_ACL_V1 + "/stats/ip")
+        ret_list = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for dict in resp.json():
+                ret_list.append(AclStats(**dict))
+            return resp, ret_list
+        return resp, []
+
+    def get_acl_ip_drop_stats(
+        self,
+    ) -> tuple[Response, DpStats | None]:
+        resp = self.http_client.http_get(API_ACL_V1 + "/stats/errors")
+        ret = None
+        if resp and resp.status_code == HTTPStatus.OK:
+            dict = resp.json()
+            ret = DpStats(**dict)
+            return resp, ret
+        return resp, ret
 
     def set_macip_rules(
         self,
