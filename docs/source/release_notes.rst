@@ -3,6 +3,25 @@
 Release Notes
 =============
 
+Release v1.2
+--------------
+Web User Interface improvements.
+
+Bug Fixes and improvements:
+
+* Historical statistics endpoints return a 10 minute history
+* Fixes and new features for the Web UI
+* Interface, Firewall, IPsec, and drop counters for charts now use historical data
+* Changes to IPsec connection to allow editing existing connections
+* Update certificate details for all certificate types
+* Add Interface chart and Runtime staistics 
+* Allow download of CSR PEM file data
+* Add support for Extended Sequence Numbers (ESNs)
+* Various API updates and bug fixes in support of the Web User Interface
+* Open Source package updates and bug fixes
+
+
+
 Release v1.1
 --------------
 Web User Interface has been added to allow management and configuration of the SK-VPN using a web browser.
