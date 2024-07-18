@@ -94,6 +94,26 @@ class ClientIpsecMgr:
                 time.sleep(wait_activate_time)
         return ret, response
 
+    def modify_connection(
+        self,
+        conn_name: str,
+        conn_model: ConnCreateModel,
+        activate=True,
+        wait_activate_time: float | None = None,
+    ) -> tuple[bool, Response]:
+        response = self.http_client.http_put(
+            API_IPSEC_V1 + "/connections/" + conn_name,
+            json=json.loads(conn_model.model_dump_json()),
+        )
+        ret = self.http_client.check_job_response(response)
+
+        if ret and response.status_code == HTTPStatus.ACCEPTED and activate:
+            print(f"Activating {conn_model.name}")
+            ret, response = self.load_connection(conn_model.name)
+            if wait_activate_time:
+                time.sleep(wait_activate_time)
+        return ret, response
+
     def initiate_child_sa(self, child_name: str) -> bool:
         model = NameModel(name=child_name)
         json_data = json.loads(model.model_dump_json())

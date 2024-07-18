@@ -44,6 +44,68 @@ class ClientStatsMgr:
 
         return resp, None
 
+    def get_ipsec_counter_history(
+        self,
+    ) -> tuple[Response, list[DpStats]]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/history/ipsec")
+
+        ret = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for k in resp.json():
+                ret.append(DpStats(**k))
+            return resp, ret
+        return resp, ret
+
+    def get_error_counter_history(
+        self,
+    ) -> tuple[Response, list[DpStats]]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/history/errors")
+
+        ret = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for k in resp.json():
+                ret.append(DpStats(**k))
+            return resp, ret
+        return resp, ret
+
+    def get_iface_counter_history(
+        self,
+    ) -> tuple[Response, list[DpStats]]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/history/iface")
+
+        ret = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for k in resp.json():
+                ret.append(DpStats(**k))
+            return resp, ret
+        return resp, ret
+
+    def get_sa_counter_history(
+        self,
+    ) -> tuple[Response, list[DpStats]]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/history/sas")
+
+        ret = []
+        if resp and resp.status_code == HTTPStatus.OK:
+            for k in resp.json():
+                ret.append(DpStats(**k))
+            return resp, ret
+        return resp, ret
+
+    def get_runtime_stats(self) -> tuple[Response, StatsStringModel | None]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/runtime")
+
+        if resp and resp.status_code == HTTPStatus.OK:
+            stats_json = resp.json()
+            return resp, StatsStringModel(**stats_json)
+
+        return resp, None
+
     def get_error_stats(
         self,
     ) -> tuple[Response, StatsStringModel | None]:
@@ -61,6 +123,16 @@ class ClientStatsMgr:
     ) -> tuple[Response, DpStats | None]:
 
         resp = self.http_client.http_get(API_STATS_V2 + "/errors")
+
+        if resp and resp.status_code == HTTPStatus.OK:
+            stats_json = resp.json()
+            return resp, DpStats(**stats_json)
+
+        return resp, None
+
+    def get_iface_stats(self) -> tuple[Response, DpStats | None]:
+
+        resp = self.http_client.http_get(API_STATS_V1 + "/iface")
 
         if resp and resp.status_code == HTTPStatus.OK:
             stats_json = resp.json()

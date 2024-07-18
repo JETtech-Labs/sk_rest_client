@@ -972,6 +972,157 @@
                 ]
             }
         },
+        "/api/stats/v1/history/ipsec": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get IPsec historical data",
+                "description": "Get IPsec historical data",
+                "operationId": "Statistics-get_ipsec_counter_history",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DpStats"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Statistics-Get Ipsec Counter History"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/history/errors": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get Errors historical data",
+                "description": "Get Errors Historical data",
+                "operationId": "Statistics-get_errors_counter_history",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DpStats"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Statistics-Get Errors Counter History"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/history/sas": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get IPsec Security Association historical data",
+                "description": "Get IPsec Security Association Historical data",
+                "operationId": "Statistics-get_sas_counter_history",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DpStats"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Statistics-Get Sas Counter History"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/history/iface": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get software Interface historical data",
+                "description": "Get software Interface Historical data",
+                "operationId": "Statistics-get_iface_counter_history",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DpStats"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Statistics-Get Iface Counter History"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/runtime": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get dataplane runtime stats",
+                "description": "Get dataplane runtime stats",
+                "operationId": "Statistics-get_runtime_stats",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatsStringModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
         "/api/stats/v1/errors": {
             "get": {
                 "tags": [
@@ -1007,6 +1158,33 @@
                 "summary": "Get Dataplane Error Stats in JSON Format",
                 "description": "Get Dataplane Error Stats in JSON Format",
                 "operationId": "Statistics-get_dp_error_stats_json",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DpStats"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/iface": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get Dataplane software interface Stat",
+                "description": "Get Dataplane software interface Stats",
+                "operationId": "Statistics-get_dp_iface_stats_json",
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -1228,6 +1406,37 @@
                                     },
                                     "type": "array",
                                     "title": "Response Certificates-Get All Certs"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v1/all/details": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Get Certificate details for all Certificates",
+                "description": "Get Certificate details for all Certificates",
+                "operationId": "Certificates-get_all_cert_details",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/CertDetailModel"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Certificates-Get All Cert Details"
                                 }
                             }
                         }
@@ -3474,6 +3683,64 @@
                 ]
             }
         },
+        "/api/ipsec/v1/connections/{conn_name}": {
+            "put": {
+                "tags": [
+                    "IPsec"
+                ],
+                "summary": "Modify Existing Connection",
+                "description": "Modify Existing Connection",
+                "operationId": "IPsec-modify_ipsec_connection",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "conn_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Conn Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConnCreateModel-Input"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JobNumber"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/ipsec/v1/sas": {
             "get": {
                 "tags": [
@@ -4163,6 +4430,76 @@
                 },
                 "responses": {
                     "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/crypto/v1/settings": {
+            "get": {
+                "tags": [
+                    "Crypto"
+                ],
+                "summary": "Get the crypto settings.",
+                "description": "Get the crypto settings.",
+                "operationId": "Crypto-get_crypto_settings",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CryptoSettings"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Crypto"
+                ],
+                "summary": "Change the crypto settings.",
+                "description": "Change the crypto settings.",
+                "operationId": "Crypto-post_crypto_settings",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CryptoSettings"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
@@ -4983,6 +5320,12 @@
                         ],
                         "key": " life-time"
                     },
+                    "esn": {
+                        "type": "boolean",
+                        "title": "Esn",
+                        "description": "Extended Sequence Number",
+                        "default": false
+                    },
                     "local_ts": {
                         "items": {
                             "$ref": "#/components/schemas/IpSubnetModel"
@@ -5164,6 +5507,12 @@
                             6000
                         ],
                         "key": " life-time"
+                    },
+                    "esn": {
+                        "type": "boolean",
+                        "title": "Esn",
+                        "description": "Extended Sequence Number",
+                        "default": false
                     },
                     "local_ts": {
                         "items": {
@@ -5763,6 +6112,24 @@
                     "children"
                 ],
                 "title": "ConnectionModel"
+            },
+            "CryptoSettings": {
+                "properties": {
+                    "async_enabled": {
+                        "type": "boolean",
+                        "title": "Async Enabled",
+                        "description": "True if Async Crypto is enabled",
+                        "default": true
+                    },
+                    "secure_key_enabled": {
+                        "type": "boolean",
+                        "title": "Secure Key Enabled",
+                        "description": "True if Secure Key Crypto Engine is enabled. Changing this setting requires a reboot",
+                        "default": true
+                    }
+                },
+                "type": "object",
+                "title": "CryptoSettings"
             },
             "CsrResponseModel": {
                 "properties": {

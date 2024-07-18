@@ -140,6 +140,15 @@ class ClientCertMgr:
             response, ignore_job_failure=False, timeout=timeout
         )
 
+    def get_all_cert_details(self) -> tuple[Response, list[CertDetailModel]]:
+        response = self.http_client.http_get(API_CERTS_V1 + "/all/details")
+        resp_list = []
+        if response and response.status_code == HTTPStatus.OK:
+            for model_data in response.json():
+                resp_list.append(CertDetailModel(**model_data))
+
+        return response, resp_list
+
     def get_cert_details(
         self, cert_fingerprint: str
     ) -> tuple[Response, CertDetailModel | None]:
