@@ -70,6 +70,7 @@ class HttpClient:
         otp_handler: Callable[[str], str] | None = None,
         initial_user_handler: Callable[[], tuple[str, str]] | None = None,
         wait_for_jobs: bool = True,
+        timeout: int = 5,
     ):
         self.address = address
         self.port = port
@@ -129,7 +130,8 @@ class HttpClient:
         self.api_url += API_ROOT
         self.logger.debug("Using API URL:" + self.api_url)
 
-        # self.set_kwargs(timeout=5)
+        self.timeout = timeout
+        self.set_kwargs(timeout=self.timeout)
 
     def close_session(self):
         if self.session:

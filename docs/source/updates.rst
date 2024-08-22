@@ -9,8 +9,8 @@ Check for and Install Software Updates
 --------------------------------------
 Software updates are made available for the SecureKey VPN as features are added and bugs are fixed.
 
-The SK-VPN can check for updates and download available software updates from the SK-VPN Management Interface.
-The SK-VPN must be connected to the internet for this check. 
+The SK-VPN can check for updates and download available software updates using the SK-VPN Management Interface.
+The SK-VPN must be connected to the internet for software updates to be installed. 
 
 The REST API or Web UI may be used to manage SW updates.
 

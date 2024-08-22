@@ -3,6 +3,17 @@
 Release Notes
 =============
 
+Release v1.3
+--------------
+Google Cloud support.
+
+Bug Fixes and improvements:
+
+* Support for Google Cloud and required drivers have been added
+* Update data plane package versions
+* Fixes and new features for the Web UI
+
+
 Release v1.2
 --------------
 Web User Interface improvements.

@@ -8,60 +8,38 @@
 Overview
 ========
 
-The |SecureKey (TM)| VPN (SK-VPN) is a IPsec VPN gateway with a focus on security and performance.
-Protecting customer's networks across the cloud and cross-premises to secure today's hybrid cloud networks.
+The |SecureKey (TM)| VPN (SK-VPN) is a IPsec VPN and Firewall gateway.
+Combining the protections of the |SecureKey (TM)| Cryptographic Library and hardened open-source software
+including VPP, DPDK, StrongSwan, and FastAPI, the SK-VPN offers next generation security and performance.
+Protecting multi-cloud networks to secure enterprises from advaned threats.
 
 .. _conops:
 
 Concept of Operations
 ---------------------
 
-The |SecureKey (TM)| VPN Gateway lies at the heart of a cloud-based and hybrid network. 
-As a Network Gateway, it is used to protect networks that are connected across insecure links and the internet. 
-It can be used to protect cross-premises networks and cloud-interconnect links between regions. 
-The below image shows an example network protected by the SK-VPN Gateway. 
-The VPN acts as an internet gateway device and traffic aggregator allowing network segments to connect securely. 
-The VPN uses the strongest commercially available IPsec Encryption standards to encrypt traffic between networks.
+The |SecureKey (TM)| VPN + Firewall lies at the heart of a secure cloud network. 
+As a Point-to-Point VPN, it is used to connect private networks across the internet.
+As a Stateful and Stateless Firewall it has the ability to filter inbound and outbound network traffic.
+The SK-VPN uses the strongest commercially available IPsec Encryption standards to encrypt traffic between networks.
 
 
-.. image:: images/sk_vpn_protected_network.png
+The SK-VPN protects multi-cloud networks and can be used as a cloud gateway for hybrid networks. 
+The below image shows an example network protected by the SK-VPN. 
+The SK-VPN virtual machine is a gateway device and a traffic aggregator, allowing multiple 
+private network segments to connect securely. 
+
+
+.. image:: images/SK-VPN-Overview.png
     :align: center
 
+Each cloud provider has their own concept of virtual networks. SK-VPN is designed to operate accross all cloud providers,
+details for networking specific to each cloud provider are found in the following sections:
 
-.. _azure_network_overview:
-
-Azure Network Overview
-----------------------
-
-The |SecureKey (TM)| VPN is available in the Microsoft Azure Third Party Marketplace as a Virtual Machine. 
-The SK-VPN integrates into a Microsoft Azure network as shown below. 
-In this example, the SK-VPN is used to protect Virtual Networks (VNETs) in different geographic regions
-and to connect resources hosted in a different Cloud Service Provider (CSP). 
-Further, the SK-VPN connects networks that are protected using an On-Premises Firewalls. 
-The SK-VPN(s) can be managed from anywhere with an internet connection, below shows management using On-Premises resources.
-
-.. image:: images/sk_vpn_azure_vnet.png
-    :align: center
-
-.. _azure_vm_overview:
+* :ref:`Azure Cloud <azure_overview>`
+* :ref:`Google Cloud <google_overview>`
 
 
-Azure Virtual Machine Overview
-------------------------------
-
-The |SecureKey (TM)| Virtual Machine (VM) uses Microsoft Azure secure provisioning and Azure network resources allowing for fast and secure deployment. 
-As shown below the VM utilizes three Network Interfaces; 
-a Local Area Network (LAN) used to connect to the Virtual Network Subnets,
-a Wide Area Network (WAN) used to connect to remote peer networks, 
-and a Management (MGMT) interface. 
-
-The LAN and WAN interfaces utilize Accelerated Networking to achieve high-bandwidth network encryption. 
-The MGMT and WAN interfaces are allocated a Public IP address as they are accessible on the internet. 
-The MGMT interface is further protected using a Network Security Group (NSG) that allows only SSH and HTTPS traffic to the MGMT Interface. 
-The LAN interface use Azure Network Route Table to direct traffic destined for remote private networks through the SK-VPN Gateway
-
-.. image:: images/sk_vpn_azure_vm_setup.png
-    :align: center
 
 
 .. _security:
@@ -94,7 +72,7 @@ Management Interface:
 * Secure Shell (SSH) certificate-based authentication
 * Command Line Interface (CLI) accessible over SSH and serial console
 * Authenticated + Encrypted Syslog over TLS
-* Encrypted + Authenticated Software Update using secure hosting servers
+* Encrypted + Authenticated Software Update using our secure servers
 
 
 
@@ -104,15 +82,19 @@ Management Interface:
 Performance and Features
 ------------------------
 
-The |SecureKey (TM)| VPN Gateway uses Open Source software to implement a high performance 
-data plane capable of high-bandwidth IPsec above 10 Gbps+.
+The |SecureKey (TM)| VPN and Firewall uses high performance, open-source software
+enhanced with SecureKey Cryptography for a data plane capable of bandwidths above 10 Gbps+ (AES-256-GCM).
+The SK-VPN bandwidth scales up when deployed on larger Virutal Machines with more vCPUs.
 
 The SK-VPN supports the following features and standards:
 
-* IPsec IKEv2 VPN
-   * Certificate Based Authentication IKEv2
-   * Route Based VPN
-* Access Control List (ACL) Layer2-4 firewall 
+* IPsec VPN
+   * Certificate Based Authentication using IKEv2
+   * Route Based Point-to-Point IPsec
+   * High Speed AES-256-GCM encryption (10 Gbps+)
+* Access Control List (ACL) based firewall
+   * Stateful and Stateless Modes
+   * Layer2-4 Filtering
 * Dynamic Name Server (DNS) + DNS Security Extensions (DNSSEC)
 * Network Time Protocol (NTP)
 * Syslog + Authenticated/Encrypted Syslog over TLS

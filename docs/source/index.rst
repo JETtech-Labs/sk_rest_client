@@ -1,17 +1,18 @@
 Welcome to SecureKey VPN's documentation!
 ==========================================
 
-**SecureKey VPN** (SK-VPN) is a Virtual Machine VPN gateway with a focus on security and performance.
-The SK-VPN is based on the Patent Pending SecureKey Cryptographic Library,
-details of which can be found at https://www.jettechlabs.com. 
+**SecureKey VPN** (SK-VPN) is a Point-to-Point IPsec VPN and Firewall with advanced security and performance.
+The SK-VPN uses the patent pending `SecureKey Cryptographic Library <https://www.jettechlabs.com/products>`_ to protect keys and secure networks.
 The SK-VPN has been developed through joint ventures with the US Government and JET Technology Labs Inc.
 
 The python client SDK and API Schema can be found on `Github <https://github.com/JETtech-Labs/sk_rest_client>`_ 
-and `PyPI <https://pypi.org/project/sk-client/>`_ 
-The python module can be install using `pip install sk-client`.
+and `PyPI <https://pypi.org/project/sk-client/>`_ .
+The python client module can be install by running: `pip install sk-client`.
 
-SK-VPN is available through the Azure Commercial Marketplace.
-Get started using the SK-VPN with :ref:`installation` .
+SK-VPN is available for the following cloud providers:
+
+* :ref:`Azure Cloud <azure_overview>`
+* :ref:`Google Cloud <google_overview>`
 
 
 Contents
@@ -20,7 +21,8 @@ Contents
 .. toctree::
    
    overview
-   installation
+   azure
+   google
    getting_started
    user_management
    security_config
