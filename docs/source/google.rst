@@ -30,6 +30,8 @@ Google Cloud Installation
 -------------------------
 The `gcloud <https://cloud.google.com/sdk/docs/install>`_ utility can be used to setup the necessary resources for the SK-VPN. 
 
+Terraform can be used with the `SecureKey Terraform Module <https://github.com/JETtech-Labs/sk_vpn_terraform>`_  
+
 Below is an example script to create the SK-VPN in Google Cloud - update the variables to match your account and network.
 
 Create the Networks and Subnets for the SK-VPN:
@@ -113,22 +115,22 @@ Create the SK-VPN Virtual Machine:
 .. code-block:: bash
 
     # update below with the latest SK-VPN version
-    SK_VPN_PROJECT="jet-tech"
-    SK_VPN_FAMILY="sk-vpn"
+    IMAGE_PROJECT="jet-technology-labs-public"
+    IMAGE_FAMILY="sk-vpn-prod"
     
     ZONE="${REGION}-a"
 
     # chose a VM size that supports GVNIC, and has at least 8 vCPUs
     INSTANCE_NAME="sk-vpn-vm1"
-    VM_SIZE="c2-standard-8"
+    MACHINE_TYPE="c2-standard-8"
     # GVNIC_QUEUES can grow depending on the number of vCPUs in the VM
     GVNIC_QUEUES="2"
 
     # create the SK-VPN VM
     gcloud compute instances create ${INSTANCE_NAME} \
-    --image-project ${SK_VPN_PROJECT} \
-    --image-family ${SK_VPN_FAMILY} \
-    --machine-type ${VM_SIZE} \
+    --image-project ${IMAGE_PROJECT} \
+    --image-family ${IMAGE_FAMILY} \
+    --machine-type ${MACHINE_TYPE} \
     --zone ${ZONE} \
     --metadata-from-file ssh-keys=${SK_ADMIN_KEY_FILE} \
     --network-interface network=${MGMT_NET_NAME},subnet=${MGMT_SUBNET_NAME},address=${MGMT_PUBLIC_IP_NAME},stack-type=IPV4_ONLY,nic-type=VIRTIO_NET \
@@ -191,11 +193,11 @@ To allow traffic in a private network (LAN) to be sent through the SK-VPN the fo
 
 .. code-block:: bash
 
-    # get the Private IP address for teh SK_VPN's LAN subnet
+    # get the Private IP address for the SK_VPN's LAN subnet
     gw_ip=$(gcloud compute instances describe ${INSTANCE_NAME} --zone ${ZONE} --format='get(networkInterfaces[2].networkIP)')
     
     route_name="remote-lan-to-sk-vpn"
-    # create the Route 10.0.1.0/24 -> SK_VPN
+    # Route traffic in 10.0.1.0/24 through the SK_VPN
     gcloud compute routes create $route_name \
     --network ${LAN_NET_NAME} \
     --next-hop-address ${gw_ip} \

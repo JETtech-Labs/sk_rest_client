@@ -158,3 +158,10 @@ class ClientAclMgr:
                 if not resp.status_code == HTTPStatus.OK:
                     return False
         return True
+
+    def clear_acl_sessions(
+        self,
+    ) -> Response:
+
+        resp = self.http_client.http_post(API_ACL_V1 + "/clear-sessions")
+        return resp

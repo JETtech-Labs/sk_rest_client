@@ -16,6 +16,7 @@ from sk_schemas.certs import (
     CsrResponseModel,
     CsrSignedRequestModel,
     CsrUuidModel,
+    HexString,
     KeyInfoModel,
     KeyLoadedInfoModel,
 )
@@ -109,7 +110,7 @@ class ClientCertMgr:
     def delete_private_keys(self, key_fingerprints: List[str]) -> bool:
         json_data = []
         for fingerprint in key_fingerprints:
-            model = KeyInfoModel(fingerprint=fingerprint, algorithm=None)
+            model = KeyInfoModel(fingerprint=HexString(fingerprint), algorithm=None)
             json_data.append(json.loads(model.model_dump_json()))
 
         response = self.http_client.http_delete(
@@ -135,6 +136,14 @@ class ClientCertMgr:
             )
 
         response = self.http_client.http_delete(API_CERTS_V1 + "/certs", json=json_data)
+
+        return self.http_client.check_job_response(
+            response, ignore_job_failure=False, timeout=timeout
+        )
+
+    def delete_all_credentials(self, timeout: int = 10) -> bool:
+
+        response = self.http_client.http_delete(API_CERTS_V1 + "/all_credentials")
 
         return self.http_client.check_job_response(
             response, ignore_job_failure=False, timeout=timeout

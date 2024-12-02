@@ -1235,6 +1235,99 @@
                 ]
             }
         },
+        "/api/stats/v1/acl-session": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get ACL Session Stats",
+                "description": "Get ACL Session Stats",
+                "operationId": "Statistics-get_acl_session_stats",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/DpStats"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Statistics-Get Acl Session Stats"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/acl-session-details": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get ACL Session Details",
+                "description": "Get ACL Session Details",
+                "operationId": "Statistics-get_acl_session_details",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatsStringModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/stats/v1/history/acl-session": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get ACL Session historical data",
+                "description": "Get ACL Session historical data",
+                "operationId": "Statistics-get_acl_session_history",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DpStats"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Statistics-Get Acl Session History"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
         "/api/certs/v1/ca": {
             "get": {
                 "tags": [
@@ -1662,6 +1755,33 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v1/all_credentials": {
+            "delete": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Delete All IPsec Certificates and Keys",
+                "description": "Delete All IPsec Certificates and Keys",
+                "operationId": "Certificates-delete_all_credentials",
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JobNumber"
                                 }
                             }
                         }
@@ -2490,7 +2610,7 @@
                 ],
                 "summary": "Enable User One Time Password",
                 "description": "Enable User One Time Password",
-                "operationId": "Authentication-set_opt_user_enable",
+                "operationId": "Authentication-set_otp_user_enable",
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -2515,7 +2635,7 @@
                 ],
                 "summary": "Disable User One Time Password",
                 "description": "Disable User One Time Password",
-                "operationId": "Authentication-set_opt_user_disable",
+                "operationId": "Authentication-set_otp_user_disable",
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -3784,14 +3904,14 @@
                 "tags": [
                     "IPsec"
                 ],
-                "summary": "Initiate Child SA ",
-                "description": "Initiate Child SA",
+                "summary": "Initiate Child SA for connection ",
+                "description": "Initiate Child SA for connection",
                 "operationId": "IPsec-initiate_ipsec_sa",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/NameModel"
+                                "$ref": "#/components/schemas/ConnectionSaModel"
                             }
                         }
                     },
@@ -3831,14 +3951,14 @@
                 "tags": [
                     "IPsec"
                 ],
-                "summary": "Terminate Child SA ",
-                "description": "Terminate Child SA",
+                "summary": "Terminate Child SA for connection ",
+                "description": "Terminate Child SA for connection",
                 "operationId": "IPsec-terminate_ipsec_sa",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/NameModel"
+                                "$ref": "#/components/schemas/ConnectionSaModel"
                             }
                         }
                     },
@@ -4455,6 +4575,31 @@
                 ]
             }
         },
+        "/api/acl/v1/clear-sessions": {
+            "post": {
+                "tags": [
+                    "Access Control"
+                ],
+                "summary": "Clear all ACL Sessions",
+                "description": "Clear all ACL Sessions",
+                "operationId": "Access Control-clear_acl_sessions",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
         "/api/crypto/v1/settings": {
             "get": {
                 "tags": [
@@ -4514,191 +4659,6 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/HTTPValidationError"
                                 }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ]
-            }
-        },
-        "/api/debug/v1/logs": {
-            "get": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Get all system logs in a zip file",
-                "description": "Get all system logs in a zip file",
-                "operationId": "Debug-get_debug_log_files",
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/x-gzip": {}
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ]
-            }
-        },
-        "/api/debug/v1/hang": {
-            "post": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Debug hang the system by sleeping for 100 seconds",
-                "operationId": "Debug-debug_cause_system_hang",
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ]
-            }
-        },
-        "/api/debug/v1/set_shell_bash/{username}": {
-            "post": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Set the users shell to bash and allow SSH bash command",
-                "operationId": "Debug-debug_set_user_shell",
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "username",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Username"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/debug/v1/restore_shell/{username}": {
-            "post": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Reset the users shell to the default (restricted) shell and set the restricted SSH command",
-                "operationId": "Debug-debug_reset_user_shell",
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "username",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Username"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/debug/v1/disable_sk_crypto": {
-            "post": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Disable SK Crypto on the dataplane - reboot is needed to take effect",
-                "operationId": "Debug-debug_disable_sk_crypto_syste",
-                "responses": {
-                    "202": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": []
-                    }
-                ]
-            }
-        },
-        "/api/debug/v1/enable_sk_crypto": {
-            "post": {
-                "tags": [
-                    "Debug"
-                ],
-                "summary": "Enable SK Crypto on the dataplane - reboot is needed to take effect",
-                "operationId": "Debug-debug_enable_sk_crypto_syste",
-                "responses": {
-                    "202": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
                             }
                         }
                     }
@@ -5055,11 +5015,7 @@
                         "description": "Boolean set ``true`` if certificate is a CA"
                     },
                     "usage": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/CertUsageEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/CertUsageEnum",
                         "description": "Certificate Usage",
                         "default": "ipsec"
                     },
@@ -5128,11 +5084,7 @@
                         ]
                     },
                     "hash": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/CertHashEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/CertHashEnum",
                         "description": "Hash Algorithm",
                         "default": "SHA-384"
                     },
@@ -5326,6 +5278,12 @@
                         "description": "Extended Sequence Number",
                         "default": false
                     },
+                    "start_action": {
+                        "$ref": "#/components/schemas/StartActionEnum",
+                        "description": "Start Action",
+                        "default": "none",
+                        "key": "start-action"
+                    },
                     "local_ts": {
                         "items": {
                             "$ref": "#/components/schemas/IpSubnetModel"
@@ -5514,6 +5472,12 @@
                         "description": "Extended Sequence Number",
                         "default": false
                     },
+                    "start_action": {
+                        "$ref": "#/components/schemas/StartActionEnum",
+                        "description": "Start Action",
+                        "default": "none",
+                        "key": "start-action"
+                    },
                     "local_ts": {
                         "items": {
                             "$ref": "#/components/schemas/IpSubnetModel"
@@ -5645,7 +5609,7 @@
                     "vpp",
                     "charon",
                     "ssh",
-                    "crypto",
+                    "SecureKey-dataplane",
                     "https"
                 ],
                 "title": "ComponentEnum"
@@ -5703,11 +5667,7 @@
                         ]
                     },
                     "local_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Local IP Address",
                         "key": " local-host"
                     },
@@ -5744,12 +5704,21 @@
                         "title": "Local Cert Fingerprint",
                         "description": "Local Certificate Fingerprint"
                     },
-                    "remote_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
+                    "local_cacerts": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Local Cacerts",
+                        "description": "Local CA Certificate IDs",
+                        "default": [],
+                        "examples": [
+                            "CN=CA1.strongswan.org"
                         ],
+                        "key": "local-cacert"
+                    },
+                    "remote_host": {
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Remote IP Address",
                         "key": " remote-host"
                     },
@@ -5891,11 +5860,7 @@
                         ]
                     },
                     "local_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Local IP Address",
                         "key": " local-host"
                     },
@@ -5932,12 +5897,21 @@
                         "title": "Local Cert Fingerprint",
                         "description": "Local Certificate Fingerprint"
                     },
-                    "remote_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
+                    "local_cacerts": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Local Cacerts",
+                        "description": "Local CA Certificate IDs",
+                        "default": [],
+                        "examples": [
+                            "CN=CA1.strongswan.org"
                         ],
+                        "key": "local-cacert"
+                    },
+                    "remote_host": {
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Remote IP Address",
                         "key": " remote-host"
                     },
@@ -6113,6 +6087,22 @@
                 ],
                 "title": "ConnectionModel"
             },
+            "ConnectionSaModel": {
+                "properties": {
+                    "connection_name": {
+                        "$ref": "#/components/schemas/NameModel"
+                    },
+                    "sa_name": {
+                        "$ref": "#/components/schemas/NameModel"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "connection_name",
+                    "sa_name"
+                ],
+                "title": "ConnectionSaModel"
+            },
             "CryptoSettings": {
                 "properties": {
                     "async_enabled": {
@@ -6175,11 +6165,7 @@
                         "description": "PEM formatted Public Certificate Data"
                     },
                     "usage": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/CertUsageEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/CertUsageEnum",
                         "description": "Certificate Usage",
                         "default": "ipsec"
                     }
@@ -6698,11 +6684,7 @@
                         "default": []
                     },
                     "interface_role": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IfaceRoleTypes"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IfaceRoleTypes",
                         "description": "Interface Role"
                     }
                 },
@@ -6726,11 +6708,7 @@
             "IpAclRule": {
                 "properties": {
                     "is_permit": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/AclAction"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/AclAction",
                         "description": "Rule Action"
                     },
                     "src_prefix": {
@@ -6806,11 +6784,7 @@
                         "description": "Input or Output"
                     },
                     "interface_role": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IfaceRoleTypes"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IfaceRoleTypes",
                         "description": "Interface to apply this rule to",
                         "default": "wan"
                     },
@@ -6895,11 +6869,7 @@
             "JobStatus": {
                 "properties": {
                     "status": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/JobStatusEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/JobStatusEnum",
                         "description": "Job Status"
                     }
                 },
@@ -6997,11 +6967,7 @@
             "MacIpAclRule": {
                 "properties": {
                     "is_permit": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/AclAction"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/AclAction",
                         "description": "Rule Action"
                     },
                     "src_mac": {
@@ -7021,11 +6987,7 @@
                         "description": "Source Prefix"
                     },
                     "interface_role": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IfaceRoleTypes"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IfaceRoleTypes",
                         "description": "Interface to apply this rule to",
                         "default": "wan"
                     },
@@ -7282,11 +7244,7 @@
                         ]
                     },
                     "local_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Local IP Address",
                         "key": " local-host"
                     },
@@ -7323,12 +7281,21 @@
                         "title": "Local Cert Fingerprint",
                         "description": "Local Certificate Fingerprint"
                     },
-                    "remote_host": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/IPorDNSNameModel"
-                            }
+                    "local_cacerts": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Local Cacerts",
+                        "description": "Local CA Certificate IDs",
+                        "default": [],
+                        "examples": [
+                            "CN=CA1.strongswan.org"
                         ],
+                        "key": "local-cacert"
+                    },
+                    "remote_host": {
+                        "$ref": "#/components/schemas/IPorDNSNameModel",
                         "description": "Remote IP Address",
                         "key": " remote-host"
                     },
@@ -7445,21 +7412,6 @@
                             60
                         ]
                     },
-                    "tasks_active": {
-                        "anyOf": [
-                            {
-                                "items": {
-                                    "type": "string"
-                                },
-                                "type": "array"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Tasks Active",
-                        "description": "Tasks Active"
-                    },
                     "child_sas": {
                         "items": {
                             "$ref": "#/components/schemas/ChildSAModel"
@@ -7507,6 +7459,37 @@
                             ]
                         ],
                         "key": "tasks-passive"
+                    },
+                    "tasks_active": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tasks Active",
+                        "description": "Tasks Active",
+                        "default": []
+                    },
+                    "tasks_queued": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Tasks Queued",
+                        "description": "List of currently queued tasks for execution",
+                        "default": [],
+                        "examples": [
+                            [
+                                "CHILD_CREATE"
+                            ]
+                        ],
+                        "key": "tasks-queued"
                     }
                 },
                 "additionalProperties": true,
@@ -7546,11 +7529,7 @@
                         "title": "Username"
                     },
                     "public_key": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/SSHPubKeyModel"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/SSHPubKeyModel",
                         "description": "SSH Public Key"
                     }
                 },
@@ -7568,6 +7547,16 @@
                     "off"
                 ],
                 "title": "SSLVerifClientEnum"
+            },
+            "StartActionEnum": {
+                "type": "string",
+                "enum": [
+                    "start",
+                    "none",
+                    "trap",
+                    "trap-start"
+                ],
+                "title": "StartActionEnum"
             },
             "StatsStringModel": {
                 "properties": {
@@ -7597,19 +7586,11 @@
             "StatusModel": {
                 "properties": {
                     "component": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/ComponentEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/ComponentEnum",
                         "description": "Component Name"
                     },
                     "status": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/StatusEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/StatusEnum",
                         "description": "Status"
                     }
                 },
@@ -7649,11 +7630,7 @@
             "SwupdateStatus": {
                 "properties": {
                     "status": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/SwupdateStatusEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/SwupdateStatusEnum",
                         "description": "Software Update Status"
                     }
                 },
@@ -7816,11 +7793,7 @@
             "TLSConfigModel": {
                 "properties": {
                     "ssl_verify_client": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/SSLVerifClientEnum"
-                            }
-                        ],
+                        "$ref": "#/components/schemas/SSLVerifClientEnum",
                         "description": "Verify Client Certificate (Mutual TLS Authentication)",
                         "default": "off",
                         "examples": [

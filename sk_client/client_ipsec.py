@@ -11,6 +11,7 @@ from sk_schemas.ipsec import (
     API_IPSEC_V1,
     ConnCreateModel,
     ConnectionModel,
+    ConnectionSaModel,
     NameModel,
     SAModel,
 )
@@ -22,7 +23,7 @@ class ClientIpsecMgr:
     def __init__(self, http_client: HttpClient) -> None:
         self.http_client = http_client
 
-    def get_active_connections(
+    def get_loaded_connections(
         self,
     ) -> List[ConnectionModel] | None:
         resp = self.http_client.http_get(API_IPSEC_V1 + "/connections/loaded")
@@ -78,7 +79,7 @@ class ClientIpsecMgr:
     def add_connection(
         self,
         conn_model: ConnCreateModel,
-        activate=True,
+        load_conn=True,
         wait_activate_time: float | None = None,
     ) -> tuple[bool, Response]:
         # first upload the connection so its saved
@@ -87,8 +88,8 @@ class ClientIpsecMgr:
         )
         ret = self.http_client.check_job_response(response)
 
-        if ret and response.status_code == HTTPStatus.ACCEPTED and activate:
-            print(f"Activating {conn_model.name}")
+        if ret and response.status_code == HTTPStatus.ACCEPTED and load_conn:
+            print(f"Loading {conn_model.name}")
             ret, response = self.load_connection(conn_model.name)
             if wait_activate_time:
                 time.sleep(wait_activate_time)
@@ -114,17 +115,23 @@ class ClientIpsecMgr:
                 time.sleep(wait_activate_time)
         return ret, response
 
-    def initiate_child_sa(self, child_name: str) -> bool:
-        model = NameModel(name=child_name)
-        json_data = json.loads(model.model_dump_json())
+    def initiate_child_sa(self, conn_name: str, child_name: str) -> bool:
+        data = ConnectionSaModel(
+            connection_name=NameModel(name=conn_name),
+            sa_name=NameModel(name=child_name),
+        )
+        json_data = json.loads(data.model_dump_json())
         response = self.http_client.http_post(
             API_IPSEC_V1 + "/sas/initiate-child", json=json_data
         )
         return self.http_client.check_job_response(response)
 
-    def terminate_child_sa(self, child_name: str) -> bool:
-        model = NameModel(name=child_name)
-        json_data = json.loads(model.model_dump_json())
+    def terminate_child_sa(self, conn_name: str, child_name: str) -> bool:
+        data = ConnectionSaModel(
+            connection_name=NameModel(name=conn_name),
+            sa_name=NameModel(name=child_name),
+        )
+        json_data = json.loads(data.model_dump_json())
         response = self.http_client.http_post(
             API_IPSEC_V1 + "/sas/terminate-child", json=json_data
         )

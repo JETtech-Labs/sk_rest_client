@@ -3,15 +3,40 @@
 Release Notes
 =============
 
+Release v2.0
+--------------
+
+SecureKey Crypto Library v2.0 updates:
+ * Improved AES throughput over SecureKey v1 (3X+ increase for small packets)
+ * Added support for AES-256-CTR and AES-256-CBC modes
+ * SecureKey OpenSSL Provider updates:
+ * SecureKey provider protects Certificates, Private Keys and Secret data in memory for Authentication and Key Exchange
+ * SecureKey provider protects AES keys in memory during encryption and decryption
+ * FIPS Certification is in progress
+
+
+* SecureKey OpenSSL Provider used for Management Plane (SSH, HTTPS, and IKEv2)
+* Enforce strong algorithms/curves for SSH and HTTPS (AES-256, and CNSA v1.0 algorithms where available)
+* Multi-layer encryption for stored Private Keys using LUKS and Database encryption
+* Update SecureKey Logo and Web UI color scheme
+* Stateful Firewall improvements - added ACL session management
+
+
+Bug Fixes:
+
+* Update COTS packages to latest versions
+* Bug fixes for the REST API and Web UI
+
+
 Release v1.3
 --------------
 Google Cloud support.
 
 Bug Fixes and improvements:
 
-* Support for Google Cloud and required drivers have been added
+* Support for Google Cloud (required drivers have been added)
 * Update data plane package versions
-* Fixes and new features for the Web UI
+* Bug fixes and new features for the Web UI
 
 
 Release v1.2
@@ -57,4 +82,6 @@ Release v1.0
 --------------
 v1.0.1717174796
 
-Initial Release of the SK-VPN.
+Initial Release of the SecureKey VPN.
+SecureKey Crypto library v1.0 is used to secure keys used by the data plane.
+

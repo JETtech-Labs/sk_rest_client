@@ -16,6 +16,7 @@ The latest version is available at https://sk-rest-client.readthedocs.io/en/late
 The documentation can be generated locally from this repository using the following commands:
 
 ```
+sudo apt install python3-sphinx python3-sphinx-rtd-theme
 pip install sphinx sphinx-rtd-theme
 
 sphinx-build -M html docs/source/ docs/build/

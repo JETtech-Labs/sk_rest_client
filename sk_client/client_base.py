@@ -9,6 +9,7 @@ from typing import Callable
 
 import requests
 from requests import Response, Session
+from requests.adapters import HTTPAdapter
 
 from sk_client.cert_utils import CertUtils
 from sk_schemas.sys import API_SYS_V1, JobNumber, JobStatus, JobStatusEnum
@@ -45,6 +46,20 @@ class UserLockedError(Exception):
     pass
 
 
+class SSLAdapter(HTTPAdapter):
+    def __init__(self, ssl_context=None, **kwargs):
+        self.ssl_context = ssl_context
+        super().__init__(**kwargs)
+
+    def init_poolmanager(self, *args, **kwargs):
+        kwargs["ssl_context"] = self.ssl_context
+        return super().init_poolmanager(*args, **kwargs)
+
+    def proxy_manager_for(self, *args, **kwargs):
+        kwargs["ssl_context"] = self.ssl_context
+        return
+
+
 class HttpClient:
 
     def __init__(
@@ -71,6 +86,7 @@ class HttpClient:
         initial_user_handler: Callable[[], tuple[str, str]] | None = None,
         wait_for_jobs: bool = True,
         timeout: int = 5,
+        ssl_context=None,
     ):
         self.address = address
         self.port = port
@@ -79,6 +95,7 @@ class HttpClient:
         self.session = None
         self.kwargs: dict = {}
         self.max_retries = max_retries
+        self.ssl_context = ssl_context
 
         self.auto_relogin = auto_relogin
         self.try_relogin = auto_relogin
@@ -133,6 +150,9 @@ class HttpClient:
         self.timeout = timeout
         self.set_kwargs(timeout=self.timeout)
 
+    def __del__(self):
+        self.close_session()
+
     def close_session(self):
         if self.session:
             self.session.close()
@@ -174,6 +194,12 @@ class HttpClient:
             )
 
             self.session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        if self.ssl_context:
+
+            # mount adapter with custom SSL context
+            adapter = SSLAdapter(ssl_context=self.ssl_context)
+            self.session.mount("https://", adapter)
 
         return self.session
 
@@ -392,6 +418,23 @@ class HttpClient:
             raise exception
         else:
             return resp
+
+    def get_connection_details(self):
+        # get the current Session and return the SSL connection details
+        assert self.session
+        with self.session.get(
+            self.api_url + "api/users/v1/me", stream=True, **self.kwargs
+        ) as response:
+            if (
+                response.raw._connection is None
+                or response.raw._connection.sock is None
+            ):
+                raise Exception("No SSL Socket")
+            sock = response.raw._connection.sock
+            cipher = sock.cipher()  # type: ignore
+            # peer_cert = sock.getpeercert()  # type: ignore
+            # shared_ciphers = sock.shared_ciphers()  # type: ignore
+        return cipher
 
     def change_password(
         self, new_password: str | None = None, relogin: bool = True

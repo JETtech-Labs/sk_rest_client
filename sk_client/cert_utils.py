@@ -289,11 +289,12 @@ class CertUtils:
         return cert
 
     @staticmethod
-    def _sn_to_elliptic_curve(sn: str) -> ec.EllipticCurve:
+    def _sn_to_elliptic_curve(curve_name: str) -> ec.EllipticCurve:
         try:
-            return ec._CURVE_TYPES[sn]()
-        except KeyError:
-            raise ValueError(f"{sn} is not a supported elliptic curve")
+            curve = getattr(ec, curve_name.upper())
+            return curve()
+        except AttributeError:
+            raise ValueError(f"Invalid curve name: {curve_name}")
 
     @staticmethod
     def gen_ec_key(key_file, curve_name="secp384r1"):
@@ -421,7 +422,7 @@ class CertUtils:
 
     @staticmethod
     def gen_test_ca(
-        alg="rsa", common_name: str | None = None, out_dir="/tmp/"
+        alg="rsa", common_name: str | None = None, out_dir="/tmp/", valid_days=10
     ) -> tuple[str, str]:
         cert_file = tempfile.NamedTemporaryFile(
             prefix="test_ca_cert", suffix=".pem", dir=out_dir
@@ -439,6 +440,7 @@ class CertUtils:
             alg=alg,
             key_out_file=key_file,
             cert_out_file=cert_file,
+            days=valid_days,
             subject=x509.Name(
                 [
                     x509.NameAttribute(NameOID.COUNTRY_NAME, "US"),
@@ -482,11 +484,12 @@ class CertUtils:
         return ca_cert_file, user_cert_file, user_key_file
 
     @staticmethod
-    def gen_tls_signed_certs(alg="ec", out_dir="/tmp/"):
+    def gen_tls_signed_certs(alg="ECDSA", out_dir="/tmp/"):
         # generate test CA and TLS Certificates signed by the CA
         ca_cert_file, ca_key_file = CertUtils.gen_test_ca(
             alg=alg,
-            common_name="Test TLS Root CA"
+            valid_days=365,
+            common_name=f"Test TLS {alg} Root CA"
             + datetime.now().strftime(" %Y-%m-%d %H:%M:%S"),
             out_dir=out_dir,
         )
@@ -500,6 +503,7 @@ class CertUtils:
         # generate test CA and TLS Certificates signed by the CA
         ca_cert_file, ca_key_file = CertUtils.gen_test_ca(
             alg=alg,
+            valid_days=365,
             common_name="Test HTTPS Root CA"
             + datetime.now().strftime(" %Y-%m-%d %H:%M:%S"),
             out_dir=out_dir,
