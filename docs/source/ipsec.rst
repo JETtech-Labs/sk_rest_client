@@ -88,6 +88,47 @@ Security Associations are managed using the REST API.
 * Force Termination of an SA: POST ``/ipsec/sas/terminate-child``
 * Get list of a Connection's SAs: GET ``/ipsec/connections`` use the `children` field for the list of SAs
 
+.. _post_quantum_safe_mlkem:
+
+Post Quantum Safe IPsec 
+-----------------------
+SecureKey VPN supports both Postquantum Preshared Keys (PPK, RFC 8784) 
+and Post Quantum Safe ML KEM (RFC 9370 and RFC 9242) for IKEv2 connections.
+
+----------------------
+Post Quantum Safe PPKs
+----------------------
+An IKEv2 PPK is configurable using the Web UI and REST API. 
+First a shared secret must be imported to the SK-VPN. 
+This shared-secret is identied using a unqiue ID string and is a random Hexadecimal String up to 32 bytes long (64 characters).
+Once upload a PPK can be used by a new IKEv2 connection by selecting the PPK from the list of available PPKs.
+When an SA is activated the SK-VPN will use the PPK and the SA status will indicate that PPK is in use. 
+
+Using the REST API: POST ``/certs/shared_secret`` 
+Using the Web UI: Certificates -> Shared Secrets
+
+.. image:: images/UI/Shared_Secret_PPK.png
+    :align: center 
+
+|
+
+-------------------------
+Post Quantum Safe ML KEMs
+-------------------------
+IKEv2 ML KEM (RFC 9370 and RFC 9242) are supported. 
+
+IKEv2 Connections can be configured with additional KEMs to support Post Quantum Safe Key Exchange.
+Currently MLKEM-1024 (Kyber1024) is the only CNSA v2.0 KEM.
+
+To configure connections to use additional Post Quantum Key Exchange Methods,
+select "mlkem1024" from the list of available KEMs in the Web UI. Default is None.
+Note PPK can be used with additional Key Exchange Methods.
+
+.. image:: images/UI/Post_Quantum_IPsec_Options.png
+    :align: center 
+    :scale: 50%
+
+|
 
 Next Steps
 -----------

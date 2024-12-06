@@ -163,16 +163,13 @@ From the REST API:
 
 .. note::
     SSH users are independent from the password based username(s) that are used to login to the CLI and REST API.
-    SSH users access the device via SSH with the ``ssh -i [keyfile] [ssh_user]@[hostname]`` command.
+    SSH users access the command line interface via SSH with the ``ssh -i [keyfile] [ssh_user]@[hostname]`` command.
 
-    Once the SSH user is authenticated (using SSH public key authentication), the user can login 
-    via the CLI interface using a device username + password. 
+    Once the SSH user is authenticated (using SSH public key authentication), the user must login 
+    via the CLI using a username + password (+ MFA if enabled). 
     see :ref:`user_management`.
     
     It is possible to use the same username for SSH and CLI/REST API but it is not required.
-
-    This allows for SSH users to be added and deleted without impacting the SK-VPN user names.
-    And also allows 
 
 
 Next Steps:

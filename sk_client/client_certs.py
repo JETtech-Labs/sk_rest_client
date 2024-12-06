@@ -19,6 +19,8 @@ from sk_schemas.certs import (
     HexString,
     KeyInfoModel,
     KeyLoadedInfoModel,
+    SharedSecretDataModel,
+    SharedSecretsModel,
 )
 
 from .client_base import HttpClient
@@ -250,6 +252,60 @@ class ClientCertMgr:
             return resp, ret_list
         else:
             return resp, None
+
+    def get_shared_secrets(
+        self,
+    ) -> tuple[Response, list[SharedSecretsModel] | None]:
+        resp = self.http_client.http_get(API_CERTS_V1 + "/shared_secrets")
+        if resp and resp.status_code == HTTPStatus.OK:
+            ret_list = []
+            json_list = resp.json()
+            for resp_json in json_list:
+                ret_list.append(SharedSecretsModel(**resp_json))
+            return resp, ret_list
+        else:
+            return resp, None
+
+    def get_loaded_shared_secrets(
+        self,
+    ) -> tuple[Response, list[SharedSecretsModel] | None]:
+        resp = self.http_client.http_get(API_CERTS_V1 + "/shared_secrets/loaded")
+        if resp and resp.status_code == HTTPStatus.OK:
+            ret_list = []
+            json_list = resp.json()
+            for resp_json in json_list:
+                ret_list.append(SharedSecretsModel(**resp_json))
+            return resp, ret_list
+        else:
+            return resp, None
+
+    def post_shared_secret(
+        self,
+        id: str,
+        data: HexString,
+        type: str = "PPK",
+    ) -> tuple[Response, SharedSecretsModel | None]:
+        data = json.loads(SharedSecretDataModel(id=id, data=data).model_dump_json())
+
+        resp = self.http_client.http_post(API_CERTS_V1 + "/shared_secret", json=data)
+        if resp and resp.status_code == HTTPStatus.ACCEPTED:
+            resp_json = resp.json()
+            return resp, SharedSecretsModel(**resp_json)
+        else:
+            return resp, None
+
+    def delete_shared_secrets(self, ids: List[str], timeout: int = 10) -> bool:
+        json_data = []
+        for id in ids:
+            json_data.append(json.loads(SharedSecretsModel(id=id).model_dump_json()))
+
+        response = self.http_client.http_delete(
+            API_CERTS_V1 + "/shared_secrets", json=json_data
+        )
+
+        return self.http_client.check_job_response(
+            response, ignore_job_failure=False, timeout=timeout
+        )
 
     def get_open_csrs(
         self,

@@ -13,7 +13,7 @@ IPsec Certificates must meet the following standards:
 
 * CNSA v1.0 Algorithms: `CNSA v1.0 <https://media.defense.gov/2021/Sep/27/2002862527/-1/-1/0/CNSS%20WORKSHEET.PDF>`_ 
 * RSA (3072-bit+) 
-* ECC (P-384+)
+* EC (P-384+)
 * Hashes (SHA-384+)
 
 

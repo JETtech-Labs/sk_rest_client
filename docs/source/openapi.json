@@ -2491,6 +2491,164 @@
                 ]
             }
         },
+        "/api/certs/v1/shared_secret": {
+            "post": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Upload Shared Secret Data",
+                "description": "Upload Shared Secret Data",
+                "operationId": "Certificates-post_shared_secret",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SharedSecretDataModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SharedSecretsModel"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v1/shared_secrets": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Get all Shared Secrets",
+                "description": "Get all Shared Secrets",
+                "operationId": "Certificates-get_shared_secrets",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/SharedSecretsModel"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Certificates-Get Shared Secrets"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Delete Shared Secrets from System",
+                "description": "Delete Shared Secrets from System",
+                "operationId": "Certificates-delete_shared_secrets",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/SharedSecretsModel"
+                                },
+                                "type": "array",
+                                "title": "Shared Secrets"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JobNumber"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v1/shared_secrets/loaded": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Get Shared Secrets loaded into the Dataplane",
+                "description": "Get Shared Secrets loaded into the Dataplane",
+                "operationId": "Certificates-get_loaded_shared_secrets",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/SharedSecretsModel"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Certificates-Get Loaded Shared Secrets"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
         "/api/auth/v1/token": {
             "post": {
                 "tags": [
@@ -5227,12 +5385,32 @@
                         "type": "string",
                         "title": "Dh Group",
                         "description": "DH Group Name",
-                        "default": "MODP_4096",
+                        "default": "",
                         "examples": [
                             "MODP_4096",
-                            "ECP384"
+                            "ECP_384"
                         ],
                         "key": "dh-group"
+                    },
+                    "kem_groups": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "maxItems": 7
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Kem Groups",
+                        "description": "Additional Key Exchange Methods (RFC 9370)",
+                        "examples": [
+                            "mlkem786",
+                            "mlkem1024"
+                        ]
                     },
                     "mode": {
                         "type": "string",
@@ -5421,12 +5599,32 @@
                         "type": "string",
                         "title": "Dh Group",
                         "description": "DH Group Name",
-                        "default": "MODP_4096",
+                        "default": "",
                         "examples": [
                             "MODP_4096",
-                            "ECP384"
+                            "ECP_384"
                         ],
                         "key": "dh-group"
+                    },
+                    "kem_groups": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "maxItems": 7
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Kem Groups",
+                        "description": "Additional Key Exchange Methods (RFC 9370)",
+                        "examples": [
+                            "mlkem786",
+                            "mlkem1024"
+                        ]
                     },
                     "mode": {
                         "type": "string",
@@ -5649,12 +5847,32 @@
                         "type": "string",
                         "title": "Dh Group",
                         "description": "DH Group Name",
-                        "default": "MODP_4096",
+                        "default": "",
                         "examples": [
                             "MODP_4096",
-                            "ECP384"
+                            "ECP_384"
                         ],
                         "key": "dh-group"
+                    },
+                    "kem_groups": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "maxItems": 7
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Kem Groups",
+                        "description": "Additional Key Exchange Methods (RFC 9370)",
+                        "examples": [
+                            "mlkem786",
+                            "mlkem1024"
+                        ]
                     },
                     "version": {
                         "type": "integer",
@@ -5785,6 +6003,19 @@
                             3600
                         ],
                         "key": " reauth-time"
+                    },
+                    "ppk_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ppk Id",
+                        "description": "Postquantum Preshared Key Identifier (PPK, RFC 8784)",
+                        "key": " ppk_id"
                     },
                     "child_sas": {
                         "items": {
@@ -5842,12 +6073,32 @@
                         "type": "string",
                         "title": "Dh Group",
                         "description": "DH Group Name",
-                        "default": "MODP_4096",
+                        "default": "",
                         "examples": [
                             "MODP_4096",
-                            "ECP384"
+                            "ECP_384"
                         ],
                         "key": "dh-group"
+                    },
+                    "kem_groups": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "maxItems": 7
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Kem Groups",
+                        "description": "Additional Key Exchange Methods (RFC 9370)",
+                        "examples": [
+                            "mlkem786",
+                            "mlkem1024"
+                        ]
                     },
                     "version": {
                         "type": "integer",
@@ -5978,6 +6229,19 @@
                             3600
                         ],
                         "key": " reauth-time"
+                    },
+                    "ppk_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ppk Id",
+                        "description": "Postquantum Preshared Key Identifier (PPK, RFC 8784)",
+                        "key": " ppk_id"
                     },
                     "child_sas": {
                         "items": {
@@ -6046,6 +6310,30 @@
                         "type": "string",
                         "title": "Unique",
                         "description": "Unique name for this Connection"
+                    },
+                    "ppk_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ppk Id",
+                        "description": "Postquantum Preshared Key Identifier (PPK)"
+                    },
+                    "ppk_required": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ppk Required",
+                        "description": "Is PPK required"
                     },
                     "local_1": {
                         "items": {
@@ -7226,12 +7514,32 @@
                         "type": "string",
                         "title": "Dh Group",
                         "description": "DH Group Name",
-                        "default": "MODP_4096",
+                        "default": "",
                         "examples": [
                             "MODP_4096",
-                            "ECP384"
+                            "ECP_384"
                         ],
                         "key": "dh-group"
+                    },
+                    "kem_groups": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "maxItems": 7
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Kem Groups",
+                        "description": "Additional Key Exchange Methods (RFC 9370)",
+                        "examples": [
+                            "mlkem786",
+                            "mlkem1024"
+                        ]
                     },
                     "version": {
                         "type": "integer",
@@ -7362,6 +7670,19 @@
                             3600
                         ],
                         "key": " reauth-time"
+                    },
+                    "ppk_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ppk Id",
+                        "description": "Postquantum Preshared Key Identifier (PPK, RFC 8784)",
+                        "key": " ppk_id"
                     },
                     "uniqueid": {
                         "type": "string",
@@ -7547,6 +7868,60 @@
                     "off"
                 ],
                 "title": "SSLVerifClientEnum"
+            },
+            "SharedSecretDataModel": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "Unique Identifier for Shared Secrets (PPKs, etc.)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Type",
+                        "description": "Type of Shared Secret",
+                        "default": "PPK",
+                        "examples": [
+                            "PPK",
+                            "IKE"
+                        ]
+                    },
+                    "data": {
+                        "type": "string",
+                        "title": "Data",
+                        "description": "Hexadecimal Data String for Shared Secret or Postquantum Preshared Key (PPK, RFC 8784)"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "data"
+                ],
+                "title": "SharedSecretDataModel"
+            },
+            "SharedSecretsModel": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "Unique Identifier for Shared Secrets (PPKs, etc.)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Type",
+                        "description": "Type of Shared Secret",
+                        "default": "PPK",
+                        "examples": [
+                            "PPK",
+                            "IKE"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "SharedSecretsModel"
             },
             "StartActionEnum": {
                 "type": "string",

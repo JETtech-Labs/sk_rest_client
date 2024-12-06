@@ -58,7 +58,9 @@ The SK-VPN supports the following security standards:
 Data Plane:
 
 * CNSA v1.0 Algorithms for IKEv2 and IPsec see: `CNSA v1.0 <https://media.defense.gov/2021/Sep/27/2002862527/-1/-1/0/CNSS%20WORKSHEET.PDF>`_ 
-* RSA (3072-bit+), ECC (P-384), AES-256-GCM, SHA-384
+* CNSA v2.0 ML KEM for IKEv2 (RFC 9370, RFC 9242) see: `CNSA v2.0 <https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF>`_ 
+* Postquantum Preshared Key (PPK, RFC 8784) for IKEv2 
+* RSA (3072-bit+), ECC (P-384+), AES-256-GCM, SHA-384
 * Certificate Based Authentication IKEv2
 * *Disallow*: Pre-Shared Keys (PSK), IKEv1, non-CNSA v1.0 algorithms
    
