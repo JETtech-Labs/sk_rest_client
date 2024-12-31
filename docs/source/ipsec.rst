@@ -99,10 +99,13 @@ and Post Quantum Safe ML KEM (RFC 9370 and RFC 9242) for IKEv2 connections.
 Post Quantum Safe PPKs
 ----------------------
 An IKEv2 PPK is configurable using the Web UI and REST API. 
-First a shared secret must be imported to the SK-VPN. 
-This shared-secret is identied using a unqiue ID string and is a random Hexadecimal String up to 32 bytes long (64 characters).
-Once upload a PPK can be used by a new IKEv2 connection by selecting the PPK from the list of available PPKs.
-When an SA is activated the SK-VPN will use the PPK and the SA status will indicate that PPK is in use. 
+First a shared secret (PPK) must be imported to the SK-VPN. 
+This shared-secret is identified using a unqiue ID string supplied by the user. 
+The data is supplied as a Hexadecimal String up to 32 bytes long (64 characters).
+
+Once uploaded, a PPK can be used in an IKEv2 connection by selecting from the list of loaded PPKs.
+When the connection is activated, the SK-VPN will set the IKEv2 PPK and the SA status will indicate that PPK is in use.
+Note the peer must also support PPK and have the identical PPK ID and data set.
 
 Using the REST API: POST ``/certs/shared_secret`` 
 Using the Web UI: Certificates -> Shared Secrets

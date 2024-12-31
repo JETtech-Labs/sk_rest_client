@@ -3,20 +3,37 @@
 Release Notes
 =============
 
+Release v2.2
+--------------
+
+AWS Support:
+
+ * AWS is now a supported platform
+ * Update kernel and drivers for AWS infrastructure
+ * Terraform Modules released to support AWS SecureKey VPN deployment
+ 
+ Bug Fixes:
+
+ * Web UI updates, enhancements, and bug fixes
+
+
+
 Release v2.1
 --------------
 
 Post Quantum Support
- * Added Post-Quantum Safe ML-KEM (RFC 9370 and RFC 9242) support for IKEv2 Connections.
+
+ * Post-Quantum Safe ML-KEM (RFC 9370 and RFC 9242) support for IKEv2 Connections.
     * ML KEM for a Hybrid Post Quantum Safe KEM (IKEv2 will always use the DH group in addition to an optional ML KEM)
     * CNSA v2.0 allows MLKEM-1024 (Kyber1024) only - this is enforced by default and so only mlkem1024 is supported in SK-VPN
     * RFC allows selection of up to 7 additional KEMs
-    * Configurable usign REST API and Web UI
- * Added Postquantum Preshared Key (PPK, RFC 8784) support to IKEv2 Connections. Configurable using REST API and Web UI.
+    * Configurable using REST API and Web UI
+ * Post Quantum Preshared Key (PPK, RFC 8784) support for IKEv2 Connections. Configurable using REST API and Web UI.
  * Improve DH Group, PRF and other IKEv2 parameters selection on the Web UI. 
 
  Bug Fixes:
- * Fix ESN configuration which was always enabling ESNs for IKEv2 connections - added to Web UI.
+
+ * Fix ESN configuration for IKEv2 connections - added ESN selectionto Web UI.
  * Numerous Web UI updates and enhancements.
 
 

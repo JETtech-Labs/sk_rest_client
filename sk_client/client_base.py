@@ -367,10 +367,10 @@ class HttpClient:
 
         return status
 
-    def upload_file(self, endpoint: str, file_name: str) -> Response:
+    def upload_file(self, endpoint: str, file_name: str, timeout=10) -> Response:
         files = {"file": open(file_name, "rb")}
 
-        resp = self.http_post(endpoint, files=files)
+        resp = self.http_post(endpoint, files=files, timeout=timeout)
         return resp
 
     def parse_login_failure(self, resp) -> Response:

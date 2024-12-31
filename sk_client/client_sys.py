@@ -78,8 +78,10 @@ class ClientSysMgr:
 
         return swupdate_status.status
 
-    def upload_swupdate_file(self, file_name: str) -> Response:
-        resp = self.http_client.upload_file(API_SYS_V1 + "/swupdate", file_name)
+    def upload_swupdate_file(self, file_name: str, timeout=10) -> Response:
+        resp = self.http_client.upload_file(
+            API_SYS_V1 + "/swupdate", file_name, timeout=timeout
+        )
         return resp
 
     def install_swupdate(self) -> Response:
