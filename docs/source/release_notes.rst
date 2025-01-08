@@ -3,6 +3,19 @@
 Release Notes
 =============
 
+Release v2.3
+--------------
+
+
+ * Initial User Creation API updates to require Instance ID
+ * Instance ID is known only to the VM instance owner making the initial user creation process more secure.
+
+ Bug Fixes:
+
+ * Web UI bug fixes, updates to support Instance ID for initial user creation
+
+
+
 Release v2.2
 --------------
 

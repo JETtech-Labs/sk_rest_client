@@ -2968,19 +2968,19 @@
                 ]
             }
         },
-        "/api/users/v1/initial": {
+        "/api/users/v2/initial": {
             "post": {
                 "tags": [
                     "User Management"
                 ],
                 "summary": "Register An Initial Admin User",
-                "description": "Register the inital admin user - only allowed once",
+                "description": "Register the inital admin user - only allowed once. Must supply instance ID as a parameter.",
                 "operationId": "User Management-Register an initial admin user",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserCreate"
+                                "$ref": "#/components/schemas/InitialUser"
                             }
                         }
                     },
@@ -6992,6 +6992,44 @@
                     "interface_role"
                 ],
                 "title": "IfaceSettings"
+            },
+            "InitialUser": {
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "title": "Password"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "is_admin": {
+                        "type": "boolean",
+                        "title": "Is Admin",
+                        "default": false
+                    },
+                    "is_active": {
+                        "type": "boolean",
+                        "title": "Is Active",
+                        "default": true
+                    },
+                    "is_otp_enabled": {
+                        "type": "boolean",
+                        "title": "Is Otp Enabled",
+                        "default": false
+                    },
+                    "instance_id": {
+                        "type": "string",
+                        "title": "Instance Id",
+                        "description": "Instance ID - must match Instance ID assigned in order to add initial user"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "password",
+                    "username"
+                ],
+                "title": "InitialUser"
             },
             "IpAclRule": {
                 "properties": {

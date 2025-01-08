@@ -8,7 +8,9 @@ via the CLI or the REST API.
 
 Users may be non-administrators or administrators where administrators can add and remove other users 
 and perform all other tasks in the SK-VPN. Non-administrators can only perform basic statistics monitoring
-and user management for their own account.
+and user management for their own account. Passwords must be 14 characters or more and meet the minimum complexity requirements.  
+
+Multi-Factor Authentication can be enabled for any user account. The system security policy can be set to enfoce MFA by all users.
 
 
 .. _initial_user:
@@ -19,10 +21,19 @@ Adding an Initial User
 The SK-VPN requires an initial user to be setup before any other functionality can be enabled.
 The initial user must be an administrator and should be set following the instructions below. 
 The REST API and CLI both support creation of the initial user.
+Initial User Creation is a one time process and must be completed before any other functionality is enabled.
+
+From v2.3+ the initial user creation requires supplying the Instance ID. 
+This secures the initial user creation process as Instance ID is known only to the VM owner.
 
 From the Web UI:
 
-On initial login the Web interface will prompt for creation of an initial user.
+To create the initial user, enter at least one character in the username and password fields then select 'login' - the values used for this do not matter since there are no users yet.
+Enter the details for the initial user as below:
+
+.. image:: images/UI/Initial_User_Create_v2.png
+    :align: center
+    :scale: 50%
 
 
 From the REST API:

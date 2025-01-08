@@ -13,6 +13,7 @@ from requests.adapters import HTTPAdapter
 
 from sk_client.cert_utils import CertUtils
 from sk_schemas.sys import API_SYS_V1, JobNumber, JobStatus, JobStatusEnum
+from sk_schemas.users import InitialUser
 
 ADDRESS = "localhost"
 HTTP_PORT = 8000
@@ -83,7 +84,7 @@ class HttpClient:
         auto_password_update=False,
         pw_change_handler: Callable[[str], str] | None = None,
         otp_handler: Callable[[str], str] | None = None,
-        initial_user_handler: Callable[[], tuple[str, str]] | None = None,
+        initial_user_handler: Callable[[], InitialUser] | None = None,
         wait_for_jobs: bool = True,
         timeout: int = 5,
         ssl_context=None,
@@ -403,8 +404,12 @@ class HttpClient:
         elif resp.status_code == HTTPStatus.FORBIDDEN and "No users exist" in resp.text:
             if self.initial_user_handler is not None:
                 self.logger.debug("Calling Initial User Handler")
-                username, password = self.initial_user_handler()
-                return self.initial_user_add(username, password)
+                initial_user = self.initial_user_handler()
+                return self.initial_user_add(
+                    username=initial_user.username,
+                    password=initial_user.password,
+                    instance_id=initial_user.instance_id,
+                )
             else:
                 exception = InitialUserRequiredError("Initial User Required")
 
@@ -499,11 +504,15 @@ class HttpClient:
             self.logger.debug("Failed Login: " + repr(resp.status_code))
             return self.parse_login_failure(resp)
 
-    def initial_user_add(self, username: str, password: str, is_admin=True) -> Response:
+    def initial_user_add_v1(
+        self,
+        username: str,
+        password: str,
+    ) -> Response:
         from sk_schemas.users import API_USERS_V1, UserCreate
 
         user_register = UserCreate(
-            username=username, password=password, is_admin=is_admin
+            username=username, password=password, is_admin=True
         ).model_dump()
 
         resp = self.http_post(API_USERS_V1 + "/initial", json=user_register)
@@ -515,6 +524,33 @@ class HttpClient:
         else:
             self.logger.debug("Failed adding initial user: " + repr(resp.status_code))
             return self.parse_login_failure(resp)
+
+    def initial_user_add_v2(
+        self, username: str, password: str, instance_id: str
+    ) -> Response:
+        from sk_schemas.users import API_USERS_V2, InitialUser
+
+        user_register = InitialUser(
+            username=username, password=password, is_admin=True, instance_id=instance_id
+        ).model_dump()
+
+        resp = self.http_post(API_USERS_V2 + "/initial", json=user_register)
+        if resp.status_code == HTTPStatus.CREATED:
+            # store the username/password
+            self.username = username
+            self.password = password
+            return self.login(username=self.username, password=self.password)
+        else:
+            self.logger.debug("Failed adding initial user: " + repr(resp.status_code))
+            return self.parse_login_failure(resp)
+
+    def initial_user_add(
+        self, username: str, password: str, instance_id: str
+    ) -> Response:
+        # @better support fallback to v1 initial user if v2 is not supported
+        return self.initial_user_add_v2(
+            username=username, password=password, instance_id=instance_id
+        )
 
     def auth_token(
         self,
