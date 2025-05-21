@@ -5,6 +5,56 @@ Security Configuration
 
 The SK-VPN supports optional security features that are recommended for production networks.
 
+.. _confidential_vm:
+
+Confidential VM Support
+-----------------------
+SK-VPN v2.4+ supports deployment in a Confidential VM (AMD SEV & SEV-SNP) environment.
+Confidential VMs encrypt the entire VM memory and provide robust protections for sensitive data.
+Furthermore, most CSPs provide support for attestation of Confidential VMs to ensure that the VM is running in a secure environment.
+
+Note: Confidential VMs will reduce the overall performance of the SK-VPN (sometimes significantly).
+
+To launch the SK-VPN inside a Confidential VM select the correct VM size and region in AWS, Azure, and Google Cloud.:
+
+AMD-SEV or AMD SEV-SNP machine sizes for AWS, Azure, and Google Cloud:
+
+* AWS: (c6a, m6a, r6a) ex: c6a.2xlarge 
+* Azure: (Das_v4, Dasv5) ex: Standard_D8as_v4, Standard_EC8ads_v5 
+* Google  (n2d, c3d) ex: n2d-standard-8, c3d-highcpu-8
+
+.. _vtpm_support:
+
+vTPM Support
+------------
+SK-VPN v2.4+ supports using vTPM for disk encryption keys in AWS, Azure, and Google Cloud.
+
+To launch a VM with a vTPM follow the below instructions or use the SK-VPN terraform modules.
+
+* Azure: https://learn.microsoft.com/en-us/azure/virtual-machines/trusted-launch
+* Google: https://cloud.google.com/compute/shielded-vm/docs/modifying-shielded-vm
+
+.. _audit_log:
+
+Audit Log
+---------
+SK-VPN supports comprehensive logging for audit purposes. 
+
+The audit log is accessible using the Web UI System -> System Logs 
+and using the REST API `sys/logs/*`` endpoints.
+
+Intrusion Detection and Prevention is based around a layered defense approach and includes multiple prevention and detection mechanisms.
+The SK-VPN uses the following:
+
+* Process Sandboxing (OS enforced using cgroups, SECCOMP filters, and namespaces)
+* Integrity Measurement Architecture (IMA) - violations are logged as part of the audit log
+* SELinux - violations are logged as part of the audit log
+* Lockdown LSM - violations are reported comprehensively in the audit log
+* Dataplane Acess Control List (ACL) Firewall - violations are reported comprehensively in the staistics page
+
+
+
+
 .. _tls_config:
 
 Enable Certificate Based Authentication (Mutual TLS)

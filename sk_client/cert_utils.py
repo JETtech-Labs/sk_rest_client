@@ -331,6 +331,8 @@ class CertUtils:
                         encryption_algorithm=serialization.NoEncryption(),
                     )
                 )
+            os.chmod(key_file, 0o600)  # Set proper permissions
+
         return key
 
     @staticmethod

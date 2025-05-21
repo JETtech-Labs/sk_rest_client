@@ -3,6 +3,27 @@
 Release Notes
 =============
 
+Release v2.4
+--------------
+
+
+ * Confidential VM support for AMD SEV & SEV-SNP in AWS, Azure, and Google Cloud
+ * Integrity Measurement Architecture (IMA) integrations and enhancements (improved intrusion prevention and detection)
+ * SELinux policy enhancements (improved intrusion detection and prevention)
+ * System report now includes IMA policy, IMA violations, and SELinux enforcement status
+ * Audit Log now available over REST API and Web UI
+ * Improved storage encryption for private keys, open CSRs, and certificates
+ * TPM 2.0 support for disk encryption keys
+ * Expanded test and validations on more VM sizes in AWS, Azure, and Google Cloud
+
+
+ Bug Fixes:
+
+ * REST API & Web UI bug fixes, updates to support new features
+ * Improved REST API certs/v2/tls/client-cert endpoints and certs/v2/tls/reload (separate reload which restarts the TLS web server may close the current connection)
+
+
+
 Release v2.3
 --------------
 

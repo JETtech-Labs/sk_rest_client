@@ -629,6 +629,33 @@
                 ]
             }
         },
+        "/api/sys/v1/logs/audit": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Get Audit Log",
+                "description": "Get Audit Log File",
+                "operationId": "System-get_audit_log",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FileDataModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
         "/api/sys/v1/tls_settings": {
             "get": {
                 "tags": [
@@ -2319,6 +2346,100 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v2/tls/client-cert": {
+            "post": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Upload a Certificate for use in HTTPS Client TLS Authentication (Mutual TLS)",
+                "description": "Upload a Certificate for use in HTTPS Client TLS Authentication (Mutual TLS), requires reloading TLS via /v2/tls/reload",
+                "operationId": "Certificates-post_tls_cert_v2",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_Certificates-post_tls_cert_v2"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CertInfoModel"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/certs/v2/tls/reload": {
+            "post": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "Reload TLS Certificates and restart the TLS Service",
+                "description": "Reaload TLS Certificates and return a JobNumber to track service restart",
+                "operationId": "Certificates-post_tls_reload",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TLSReloadModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JobNumber"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
                             }
                         }
                     }
@@ -4987,6 +5108,20 @@
                     "file"
                 ],
                 "title": "Body_Certificates-post_tls_cert"
+            },
+            "Body_Certificates-post_tls_cert_v2": {
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "file"
+                ],
+                "title": "Body_Certificates-post_tls_cert_v2"
             },
             "Body_Certificates-post_user_cert": {
                 "properties": {
@@ -8227,6 +8362,22 @@
                 },
                 "type": "object",
                 "title": "TLSConfigModel"
+            },
+            "TLSReloadModel": {
+                "properties": {
+                    "client": {
+                        "type": "boolean",
+                        "title": "Client",
+                        "default": true
+                    },
+                    "server": {
+                        "type": "boolean",
+                        "title": "Server",
+                        "default": true
+                    }
+                },
+                "type": "object",
+                "title": "TLSReloadModel"
             },
             "Token": {
                 "properties": {

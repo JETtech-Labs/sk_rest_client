@@ -1,11 +1,11 @@
 .. _ipsec_setup:
 
-IPSec Setup
+IPsec Setup
 ===========
 
 .. _ipsec_certificates:
 
-Setup IPSec Certificates
+Setup IPsec Certificates
 ------------------------
 
 The SK-VPN supports certificate based IKEv2 Security Associations.
@@ -29,7 +29,7 @@ see :ref:`ca_generation`
 
 .. _ipsec_connections:
 
-IPSec Connections
+IPsec Connections
 -----------------
 An IPsec Connection is a set of parameters to define an IKE (phase 1) connection and a set of (phase 2) Child Security Associations.
 The SK-VPN supports IKEv2 Certificate-based authentication only (no Pre-Shared Key PSK support due to the lack of key security).
@@ -53,7 +53,7 @@ Connections can be created, modified, deleted and activated using the Web UI IPs
 |
 
 
-IPSec Connections are managed using the REST API:
+IPsec Connections are managed using the REST API:
 
 * Upload a new connection: POST ``/ipsec/connections``
 * Activate a connection: POST ``/ipsec/connections/loaded/<name>``
@@ -64,9 +64,9 @@ IPSec Connections are managed using the REST API:
 
 .. _security_associations:
 
-IPSec Security Associations
+IPsec Security Associations
 ---------------------------
-IPSec Connections define a set of Security Associations (SAs) that 
+IPsec Connections define a set of Security Associations (SAs) that 
 will be installed on the SK-VPN. IPsec ESP Tunnel Mode is used by default.
 
 Each Security Association defines a secure tunnel between the SK-VPN and a remote peer.

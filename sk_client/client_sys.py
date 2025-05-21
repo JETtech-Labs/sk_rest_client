@@ -123,6 +123,7 @@ class ClientSysMgr:
             API_SYS_V1 + "/logs/ipsec",
             API_SYS_V1 + "/logs/ssh",
             API_SYS_V1 + "/logs/user-auth",
+            API_SYS_V1 + "/logs/audit",
         ]:
             resp, logs = self.get_logfile(endpoint)
             if resp.status_code == HTTPStatus.OK and logs is not None:
@@ -150,6 +151,9 @@ class ClientSysMgr:
     def get_sys_user_auth_log(self):
         return self.get_logfile(API_SYS_V1 + "/logs/user-auth")
 
+    def get_sys_audit_log(self):
+        return self.get_logfile(API_SYS_V1 + "/logs/audit")
+
     def get_sys_report(self) -> tuple[Response, List[SystemReportModel]]:
         response = self.http_client.http_get(API_SYS_V1 + "/system-report")
         resp_list = []
@@ -160,10 +164,14 @@ class ClientSysMgr:
 
         return response, resp_list
 
-    def get_system_report_field(self, field_name: str) -> str | None:
-        resp, system_report = self.get_sys_report()
+    def get_system_report_field(
+        self, field_name: str, system_report=None
+    ) -> str | None:
         if system_report is None:
-            return None
+            resp, system_report = self.get_sys_report()
+            if system_report is None:
+                return None
+
         match = [report.data for report in system_report if report.name == field_name]
         if len(match) == 0:
             return None

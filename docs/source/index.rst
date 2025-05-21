@@ -7,7 +7,11 @@ The SK-VPN has been developed through joint ventures with the US Government and 
 
 The python client SDK and API Schema can be found on `Github <https://github.com/JETtech-Labs/sk_rest_client>`_ 
 and `PyPI <https://pypi.org/project/sk-client/>`_ .
-The python client module can be install by running: `pip install sk-client`.
+The python client module can be installed by running: 
+
+.. code-block:: bash
+
+   pip install sk-client
 
 SK-VPN is available for the following cloud providers:
 

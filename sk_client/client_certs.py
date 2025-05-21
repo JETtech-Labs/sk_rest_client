@@ -9,6 +9,7 @@ from requests import Response
 
 from sk_schemas.certs import (
     API_CERTS_V1,
+    API_CERTS_V2,
     CertDetailModel,
     CertInfoModel,
     CertSigningRequestModel,
@@ -21,6 +22,7 @@ from sk_schemas.certs import (
     KeyLoadedInfoModel,
     SharedSecretDataModel,
     SharedSecretsModel,
+    TLSReloadModel,
 )
 
 from .client_base import HttpClient
@@ -282,10 +284,12 @@ class ClientCertMgr:
     def post_shared_secret(
         self,
         id: str,
-        data: HexString,
+        data: str,
         type: str = "PPK",
     ) -> tuple[Response, SharedSecretsModel | None]:
-        data = json.loads(SharedSecretDataModel(id=id, data=data).model_dump_json())
+        data = json.loads(
+            SharedSecretDataModel(id=id, data=HexString(data)).model_dump_json()
+        )
 
         resp = self.http_client.http_post(API_CERTS_V1 + "/shared_secret", json=data)
         if resp and resp.status_code == HTTPStatus.ACCEPTED:
@@ -373,10 +377,39 @@ class ClientCertMgr:
         else:
             return resp, None
 
+    def reload_tls_certs(self, client: bool, server: bool) -> bool:
+        try:
+            data = json.loads(
+                TLSReloadModel(client=client, server=server).model_dump_json()
+            )
+            response = self.http_client.http_post(
+                API_CERTS_V2 + "/tls/reload", json=data
+            )
+            return self.http_client.check_job_response(
+                response, ignore_job_failure=False
+            )
+
+        except Exception as e:
+            print("Failed to reaload_tls_certs: " + str(e))
+            return False
+
     def upload_tls_cert_file(
         self, cert_file: str
     ) -> tuple[Response, CertInfoModel | None]:
-        return self.upload_cert_file(API_CERTS_V1 + "/tls/client-cert", cert_file)
+        try:
+            # try API v2 upload then reload
+            resp, cert_info = self.upload_cert_file(
+                API_CERTS_V2 + "/tls/client-cert", cert_file
+            )
+            if resp is None or resp.status_code == HTTPStatus.NOT_FOUND:
+                raise Exception("V2 API not supported")
+            reloaded = self.reload_tls_certs(client=True, server=False)
+            if not reloaded:
+                print("Failed to reload TLS certificates")
+            return resp, cert_info
+        except Exception:
+            # fallback to v1 if v2 is not supported
+            return self.upload_cert_file(API_CERTS_V1 + "/tls/client-cert", cert_file)
 
     def delete_tls_cert(self, cert_fingerprint: str):
         model = CertInfoModel(fingerprint=cert_fingerprint, is_ca=None)
