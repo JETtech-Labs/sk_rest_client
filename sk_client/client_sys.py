@@ -201,7 +201,10 @@ class ClientSysMgr:
     ) -> datetime:
         resp, sys_time = self.get_sys_time()
         assert sys_time
-        return datetime.fromisoformat(sys_time.time)
+        if isinstance(sys_time.time, datetime):
+            return sys_time.time
+        else:
+            return datetime.fromisoformat(sys_time.time)
 
     def get_sys_machine_id(self) -> tuple[Response, MachineIDModel | None]:
         response = self.http_client.http_get(API_SYS_V1 + "/machine-id")

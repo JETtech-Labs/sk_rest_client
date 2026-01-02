@@ -4,9 +4,9 @@
 from http import HTTPStatus
 
 from requests import Response
-
 from sk_schemas.auth import (
     API_AUTH_V1,
+    API_AUTH_V2,
     OtpUriModel,
     SysSecuritySettings,
 )
@@ -26,8 +26,14 @@ class ClientAuthMgr:
             "client_id": None,
             "client_secret": otp_value,
         }
-
-        return self.http_client.http_post(API_AUTH_V1 + "/token", data=login)
+        # try v2 auth first (HTTP only, cookie based), then fallback to v1 if 404
+        try:
+            resp = self.http_client.http_post(API_AUTH_V2 + "/token", data=login)
+            if resp.status_code == HTTPStatus.NOT_FOUND:
+                raise Exception("v2 token endpoint not found, trying v1")
+            return resp
+        except Exception:
+            return self.http_client.http_post(API_AUTH_V1 + "/token", data=login)
 
     def user_change_password(
         self,

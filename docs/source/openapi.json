@@ -15,7 +15,7 @@
                 "operationId": "System-get_sys_job_status",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -93,7 +93,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -116,7 +116,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -141,7 +141,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -166,7 +166,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -193,7 +193,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -218,7 +218,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -245,7 +245,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -276,7 +276,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -303,7 +303,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -330,7 +330,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -361,7 +361,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -388,7 +388,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -431,7 +431,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -462,7 +462,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -489,7 +489,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -516,7 +516,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -543,7 +543,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -570,7 +570,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -597,7 +597,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -624,7 +624,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -651,7 +651,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -678,7 +678,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -721,7 +721,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -748,7 +748,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -793,7 +793,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -820,7 +820,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -865,7 +865,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -892,7 +892,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -907,7 +907,7 @@
                 "operationId": "Statistics-get_hw_interface_stats",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -967,7 +967,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -994,7 +994,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1025,7 +1025,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1056,7 +1056,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1087,7 +1087,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1118,7 +1118,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1145,7 +1145,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1172,7 +1172,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1199,7 +1199,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1226,7 +1226,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1257,7 +1257,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1292,7 +1292,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1319,7 +1319,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1350,7 +1350,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1381,7 +1381,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -1426,7 +1426,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1457,7 +1457,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -1502,7 +1502,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1533,7 +1533,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1564,7 +1564,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1611,7 +1611,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1626,7 +1626,7 @@
                 "operationId": "Certificates-get_cert_details_by_id",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -1674,7 +1674,7 @@
                 "operationId": "Certificates-get_cert_details_by_fingerprint",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -1738,7 +1738,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1789,7 +1789,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1816,7 +1816,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1863,7 +1863,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1894,7 +1894,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -1943,7 +1943,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -1974,7 +1974,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2005,7 +2005,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2052,7 +2052,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2095,7 +2095,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2140,7 +2140,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2171,7 +2171,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2216,7 +2216,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2259,7 +2259,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2294,7 +2294,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2329,7 +2329,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2352,7 +2352,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2399,7 +2399,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2446,7 +2446,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2481,7 +2481,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2526,7 +2526,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2549,7 +2549,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2584,7 +2584,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2607,7 +2607,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2654,7 +2654,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2685,7 +2685,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2734,7 +2734,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2765,24 +2765,24 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
         },
-        "/api/auth/v1/token": {
+        "/api/auth/v2/token": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Login for Access Token",
                 "description": "Login for Access Token",
-                "operationId": "Authentication-login_for_access_token",
+                "operationId": "Authentication-login_for_access_token_v2",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/Body_Authentication-login_for_access_token"
+                                "$ref": "#/components/schemas/Body_Authentication-login_for_access_token_v2"
                             }
                         }
                     },
@@ -2793,9 +2793,7 @@
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Token"
-                                }
+                                "schema": {}
                             }
                         }
                     },
@@ -2810,6 +2808,31 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/auth/v2/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout the Access Token",
+                "description": "Logout the Access Token",
+                "operationId": "Authentication-logout_access_token_v2",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "APIKeyCookie": []
+                    }
+                ]
             }
         },
         "/api/auth/v1/settings": {
@@ -2834,7 +2857,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -2877,7 +2900,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2902,7 +2925,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2927,7 +2950,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2950,7 +2973,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -2973,7 +2996,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3000,7 +3023,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3084,7 +3107,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3151,7 +3174,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3182,7 +3205,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3197,7 +3220,7 @@
                 "operationId": "User Management-Delete a user",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3259,7 +3282,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3274,7 +3297,7 @@
                 "operationId": "User Management-Delete a SSH user",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3350,7 +3373,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3381,7 +3404,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3396,7 +3419,7 @@
                 "operationId": "Interfaces-get_interfaces_by_role",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3477,7 +3500,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3492,7 +3515,7 @@
                 "operationId": "Interfaces-get_interface_settings",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3540,7 +3563,7 @@
                 "operationId": "Interfaces-add_interface_ip",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3594,7 +3617,7 @@
                 "operationId": "Interfaces-del_interface_ip",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3648,7 +3671,7 @@
                 "operationId": "Interfaces-get_interface_ips",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3712,7 +3735,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3743,7 +3766,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3788,7 +3811,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -3831,7 +3854,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3862,7 +3885,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -3877,7 +3900,7 @@
                 "operationId": "IPsec-load_ipsec_connection",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3923,7 +3946,7 @@
                 "operationId": "IPsec-deactivate_ipsec_connection",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -3987,7 +4010,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4032,7 +4055,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4077,7 +4100,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4092,7 +4115,7 @@
                 "operationId": "IPsec-modify_ipsec_connection",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -4173,7 +4196,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4220,7 +4243,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4267,7 +4290,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4314,7 +4337,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4361,7 +4384,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4376,7 +4399,7 @@
                 "operationId": "Access Control-get_interface_acl_rules",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -4443,7 +4466,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4490,7 +4513,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4533,7 +4556,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4576,7 +4599,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4607,7 +4630,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4634,7 +4657,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4649,7 +4672,7 @@
                 "operationId": "Access Control-get_macip_acl_rules",
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ],
                 "parameters": [
@@ -4716,7 +4739,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4763,7 +4786,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4806,7 +4829,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4849,7 +4872,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4874,7 +4897,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4901,7 +4924,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             },
@@ -4944,7 +4967,7 @@
                 },
                 "security": [
                     {
-                        "OAuth2PasswordBearer": []
+                        "APIKeyCookie": []
                     }
                 ]
             }
@@ -4965,6 +4988,7 @@
                 "properties": {
                     "time": {
                         "type": "string",
+                        "format": "date-time",
                         "title": "Time",
                         "description": "System Time ISO formatted",
                         "examples": [
@@ -4996,7 +5020,7 @@
                 ],
                 "title": "AclStats"
             },
-            "Body_Authentication-login_for_access_token": {
+            "Body_Authentication-login_for_access_token_v2": {
                 "properties": {
                     "grant_type": {
                         "anyOf": [
@@ -5051,7 +5075,7 @@
                     "username",
                     "password"
                 ],
-                "title": "Body_Authentication-login_for_access_token"
+                "title": "Body_Authentication-login_for_access_token_v2"
             },
             "Body_Certificates-post_ca_cert": {
                 "properties": {
@@ -6853,6 +6877,7 @@
                 "properties": {
                     "time": {
                         "type": "string",
+                        "format": "date-time",
                         "title": "Time",
                         "description": "System Time ISO formatted",
                         "examples": [
@@ -8232,6 +8257,7 @@
                 "properties": {
                     "time": {
                         "type": "string",
+                        "format": "date-time",
                         "title": "Time",
                         "description": "System Time ISO formatted",
                         "examples": [
@@ -8378,24 +8404,6 @@
                 },
                 "type": "object",
                 "title": "TLSReloadModel"
-            },
-            "Token": {
-                "properties": {
-                    "access_token": {
-                        "type": "string",
-                        "title": "Access Token"
-                    },
-                    "token_type": {
-                        "type": "string",
-                        "title": "Token Type"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "access_token",
-                    "token_type"
-                ],
-                "title": "Token"
             },
             "UserChangePassword": {
                 "properties": {
@@ -8583,14 +8591,10 @@
             }
         },
         "securitySchemes": {
-            "OAuth2PasswordBearer": {
-                "type": "oauth2",
-                "flows": {
-                    "password": {
-                        "scopes": {},
-                        "tokenUrl": "/api/auth/v1/token"
-                    }
-                }
+            "APIKeyCookie": {
+                "type": "apiKey",
+                "in": "cookie",
+                "name": "access_token"
             }
         }
     }

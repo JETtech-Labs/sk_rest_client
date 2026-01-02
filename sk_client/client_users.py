@@ -7,7 +7,6 @@ import string
 from http import HTTPStatus
 
 from requests import Response
-
 from sk_schemas.certs import SSHPubKeyModel
 from sk_schemas.users import (
     API_USERS_V1,
@@ -74,6 +73,7 @@ class ClientUserMgr:
 
     def get_user_me(self, token=None) -> tuple[Response, UserInfo | None]:
         if token:
+            # v1 auth testing w/ Bearer token
             headers = {"Authorization": f"Bearer {token}"}
             resp = self.http_client.http_get(API_USERS_V1 + "/me", headers=headers)
         else:

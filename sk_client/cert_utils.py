@@ -230,6 +230,8 @@ class CertUtils:
         ca_key_file,
         alg="rsa",
         out_dir="/tmp/",
+        common_name=None,
+        dns_name=None,
     ) -> tuple[str, str]:
 
         key_file = tempfile.NamedTemporaryFile(
@@ -248,7 +250,9 @@ class CertUtils:
             prefix="test_csr_", suffix=".csr", dir=out_dir
         ).name
 
-        csr_cert = CertUtils.generate_csr(csr_file, private_key)
+        csr_cert = CertUtils.generate_csr(
+            csr_file, private_key, common_name=common_name, dns_name=dns_name
+        )
         assert os.path.isfile(csr_file)
 
         # Sign the CSR using the CA key/cert
@@ -520,6 +524,18 @@ class CertUtils:
             alg=alg,
             common_name="Test Syslog Root CA"
             + datetime.now().strftime(" %Y-%m-%d %H:%M:%S"),
+            out_dir=out_dir,
+        )
+        return ca_cert_file, ca_key_file
+
+    @staticmethod
+    def gen_syslog_host_certs(root_key: str, root_cert: str, alg="ec", out_dir="/tmp/"):
+        # generate test CA and Syslog Certificates signed by the CA
+        ca_cert_file, ca_key_file = CertUtils.gen_user_cert_py(
+            ca_cert_file=root_cert,
+            ca_key_file=root_key,
+            alg=alg,
+            # common_name="Test Syslog Host "  + datetime.now().strftime(" %Y-%m-%d %H:%M:%S"),
             out_dir=out_dir,
         )
         return ca_cert_file, ca_key_file

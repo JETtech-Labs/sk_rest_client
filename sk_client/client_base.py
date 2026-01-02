@@ -10,13 +10,14 @@ from typing import Callable
 import requests
 from requests import Response, Session
 from requests.adapters import HTTPAdapter
-
-from sk_client.cert_utils import CertUtils
+from sk_schemas.auth import API_AUTH_V2
 from sk_schemas.sys import API_SYS_V1, JobNumber, JobStatus, JobStatusEnum
 from sk_schemas.users import InitialUser
 
+from sk_client.cert_utils import CertUtils
+
 ADDRESS = "localhost"
-HTTP_PORT = 8000
+HTTP_PORT = 8080
 HTTPS_PORT = 443
 API_ROOT = "/api"
 
@@ -253,7 +254,9 @@ class HttpClient:
                 self.close_session()
                 self.open_session()
         else:
-            raise ValueError("Root cert not provided - required for HTTPS verification")
+            raise ValueError(
+                f"Root cert {root_cert_file} not provided - required for HTTPS verification"
+            )
 
     def set_max_retries(self, max_retries: int = 5):
         self.max_retries = max_retries
@@ -303,7 +306,10 @@ class HttpClient:
                 return resp
             else:
                 # get new auth token
-                self.relogin()
+                resp = self.relogin()
+                if resp.status_code != HTTPStatus.OK:
+                    self.logger.info("Relogin failed")
+                    return resp
                 # retry the request
                 resp = self.do_http(action, endpoint, **kwargs)
                 if resp.status_code != HTTPStatus.UNAUTHORIZED:
@@ -480,6 +486,22 @@ class HttpClient:
             raise Exception("Cannot relogin with no username or password")
         return self.login(self.username, self.password, otp=self.otp_value)
 
+    def logout(
+        self,
+    ) -> Response | None:
+        try:
+            resp = self.http_post(API_AUTH_V2 + "/logout")
+            if self.session:
+                for cookie in self.session.cookies:
+                    if cookie.name == "access_token":
+                        self.session.cookies.clear(
+                            domain=cookie.domain, path=cookie.path, name=cookie.name
+                        )
+            return resp
+        except Exception as e:
+            self.logger.debug(f"Logout Exception: {e}")
+            return None
+
     def login(
         self,
         username: str,
@@ -492,8 +514,30 @@ class HttpClient:
             username=username, password=password, client_secret=self.otp_value
         )
         if resp.status_code == HTTPStatus.OK:
-            self.access_token = resp.json()["access_token"]
-            kwargs = {"headers": {"Authorization": f"Bearer {self.access_token}"}}
+            # check for v1/auth response or v2/auth response
+            # first check that a cookie is present in the response
+            if "access_token" in resp.cookies:
+                # v2 response - HTTP cookie based auth - session already updates cookies!
+                # if self.session:
+                #     self.session.cookies.update(resp.cookies)
+                # check that access_token cookie is present
+                # new_cookie = resp.cookies["access_token"]
+                # assert new_cookie
+
+                kwargs = {}
+            else:
+                has_json = False
+                try:
+                    json_data = resp.json()
+                    has_json = isinstance(json_data, dict)
+                except Exception:
+                    json_data = {}
+                if has_json and "access_token" in json_data:
+                    self.access_token = json_data["access_token"]
+                    kwargs = {
+                        "headers": {"Authorization": f"Bearer {self.access_token}"}
+                    }
+
             if update_user:
                 self.username = username
                 self.password = password
@@ -567,6 +611,11 @@ class HttpClient:
             "client_id": client_id,
             "client_secret": client_secret,
         }
-        from sk_schemas.auth import API_AUTH_V1_TOKEN
+        from sk_schemas.auth import API_AUTH_V2_TOKEN
 
-        return self.http_post(API_AUTH_V1_TOKEN, data=login)
+        resp = self.http_post(API_AUTH_V2_TOKEN, data=login)
+        if resp.status_code == HTTPStatus.NOT_FOUND:
+            from sk_schemas.auth import API_AUTH_V1_TOKEN
+
+            return self.http_post(API_AUTH_V1_TOKEN, data=login)
+        return resp

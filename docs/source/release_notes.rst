@@ -3,6 +3,29 @@
 Release Notes
 =============
 
+Release v3.0
+--------------
+
+
+ * Post Quantum TLS and SSH (Hybrid PQC)
+ * FIPS compliant cryptography used system wide
+ * Improved AES-256 performance
+ * Improved Web UI layout and Security (HTTPS cookies)
+ * Software Update mechanism enhancements
+ * Package version updates and bug fixes
+ * OpenSSL version and patches for memory security
+
+
+ Bug Fixes:
+
+ * REST API & Web UI bug fixes
+
+ Notes:
+ 
+ * Requires fresh install (upgrade from previous versions is not supported)
+
+
+
 Release v2.4
 --------------
 
